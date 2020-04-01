@@ -5,6 +5,8 @@
  * creates a new property listing
  */
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.*;
 
 public class Property {
@@ -12,9 +14,9 @@ public class Property {
     private int month;
     private String town;
     private String flatType;
-    private float sqfeet;
+    private double sqfeet;
     private int remainingLease;
-    private float price;
+    private double price;
 
     /**
      * Getters and setters for Flight class
@@ -53,11 +55,11 @@ public class Property {
         this.flatType = flatType;
     }
 
-    public float getSqfeet() {
+    public double getSqfeet() {
         return this.sqfeet;
     }
 
-    public void setSqfeet(float sqfeet) {
+    public void setSqfeet(double sqfeet) {
         this.sqfeet = sqfeet;
     }
 
@@ -69,14 +71,19 @@ public class Property {
         this.remainingLease = remainingLease;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     
+
+    /**
+     * The toSring method prints out each Property instance in an arrayList
+     */
+
     public String toString() {
     	ArrayList<String> flat = new ArrayList<String>();
     	flat.add(Integer.toString(year));
@@ -94,12 +101,11 @@ public class Property {
      * Constructor for property class.
      */
 
-    public Property(int year, int month, String town, String flatType, float sqfeet, int remainingLease, 
-        float price) {
+    public Property(int year, int month, String town, String flatType, double sqfeet, int remainingLease, double price) {
         this.year = year;
         this.month = month;
-        this.town = town;
-        this.flatType = flatType;
+        this.town = town.toUpperCase();
+        this.flatType = flatType.toUpperCase();
         this.sqfeet = sqfeet;
         this.remainingLease = remainingLease;
         this.price = price;
@@ -107,7 +113,8 @@ public class Property {
 
     /**
      * toFlat method splits each row of data from a .csv file and
-     * creates a new property object. 
+     * creates a new property object by creating the instance variables
+     * within each Property instance
      */
 
     public static Property toFlat(String data) {
@@ -118,13 +125,14 @@ public class Property {
         String town = col[1];
         String[] rooms = col[2].split(" ");
         String flatType = rooms[0];
-        float sqfeet = Float.parseFloat(col[6]);
+        double sqfeet = Double.parseDouble(col[6]);
         String[] yearsLeft = col[9].split(" ");
         int remainingLease = Integer.parseInt(yearsLeft[0]);
-        float price = Float.parseFloat(col[10]);
+        double price = Double.parseDouble(col[10]);
         Property currFlat = new Property(year, month, town, flatType, sqfeet, remainingLease, price);
 
         return currFlat;
     }
 
+    
 }
