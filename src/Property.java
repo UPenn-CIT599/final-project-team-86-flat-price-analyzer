@@ -11,10 +11,10 @@ public class Property {
     private int year;
     private int month;
     private String town;
-    private int numRooms;
-    private int sqfeet;
+    private String flatType;
+    private float sqfeet;
     private int remainingLease;
-    private int price;
+    private float price;
 
     /**
      * Getters and setters for Flight class
@@ -45,19 +45,19 @@ public class Property {
         this.town = town;
     }
 
-    public int getNumRooms() {
-        return this.numRooms;
+    public String getFlatType() {
+        return this.flatType;
     }
 
-    public void setNumRooms(int numRooms) {
-        this.numRooms = numRooms;
+    public void setFlatType(String flatType) {
+        this.flatType = flatType;
     }
 
-    public int getSqfeet() {
+    public float getSqfeet() {
         return this.sqfeet;
     }
 
-    public void setSqfeet(int sqfeet) {
+    public void setSqfeet(float sqfeet) {
         this.sqfeet = sqfeet;
     }
 
@@ -69,24 +69,37 @@ public class Property {
         this.remainingLease = remainingLease;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return this.price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
+    }
+    
+    public String toString() {
+    	ArrayList<String> flat = new ArrayList<String>();
+    	flat.add(Integer.toString(year));
+        flat.add(Integer.toString(month));
+        flat.add(town);
+    	flat.add(flatType);
+    	flat.add(String.valueOf(sqfeet));
+    	flat.add(Integer.toString(remainingLease));
+    	flat.add(String.valueOf(price));
+    	
+    	return flat.toString();
     }
 
     /**
      * Constructor for property class.
      */
 
-    public Property(int year, int month, String town, int numRooms, int sqfeet, int remainingLease, 
-        int price) {
+    public Property(int year, int month, String town, String flatType, float sqfeet, int remainingLease, 
+        float price) {
         this.year = year;
         this.month = month;
         this.town = town;
-        this.numRooms = numRooms;
+        this.flatType = flatType;
         this.sqfeet = sqfeet;
         this.remainingLease = remainingLease;
         this.price = price;
@@ -104,11 +117,12 @@ public class Property {
         int month = Integer.parseInt(saleDate[1]);
         String town = col[1];
         String[] rooms = col[2].split(" ");
-        int numRooms = Integer.parseInt(rooms[0]);
-        int sqfeet = Integer.parseInt(col[6]);
-        int remainingLease = Integer.parseInt(col[9]);
-        int price = Integer.parseInt(col[10]);
-        Property currFlat = new Property(year, month, town, numRooms, sqfeet, remainingLease, price);
+        String flatType = rooms[0];
+        float sqfeet = Float.parseFloat(col[6]);
+        String[] yearsLeft = col[9].split(" ");
+        int remainingLease = Integer.parseInt(yearsLeft[0]);
+        float price = Float.parseFloat(col[10]);
+        Property currFlat = new Property(year, month, town, flatType, sqfeet, remainingLease, price);
 
         return currFlat;
     }

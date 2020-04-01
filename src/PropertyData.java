@@ -13,4 +13,8 @@ public class PropertyData {
         propertyList.add(property);
     }
 
+    public Property getProperty(int index) {
+        return propertyList.get(index);
+    }
+    
 }
