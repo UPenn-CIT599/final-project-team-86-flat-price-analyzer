@@ -77,3 +77,13 @@ We hope that the tool will answer questions that users will have about a propert
 ## Suggested workflow:
  
 CSV files (Jan 2015 - current) → PropertyReader → Property + PropertyData (stores all listings in an arraylist) → User Input Parameters (under widget/ GUI) → MathAnalysis → Chart → Widget
+
+
+## Widget walkthrough:
+
+![Landing](screengrabs/1_Landing.png?raw=true "Landing Page")
+![Landing](screengrabs/2_PropertyPriceIndices.png?raw=true "Property Price Indices")
+![Landing](screengrabs/3_LocationInsights.png?raw=true "Location Insights")
+![Landing](screengrabs/4_Calculators.png?raw=true "Calculators")
+![Landing](screengrabs/5_About.png?raw=true "About")
+![Landing](screengrabs/6_Help.png?raw=true "Help")
