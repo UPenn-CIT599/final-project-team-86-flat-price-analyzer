@@ -1,0 +1,14 @@
+This file contains the insightful information we want to get from the set of property data.
+The information will be provided to the end-user.
+
+Questions :
+1. What is the national max, min and average price of all the flats in Singapore? 
+
+2. What is the town max, min and average price? 
+
+3. What is the median value of the flat (user given flat floor area/sqm) at the location (user given flat location)?
+
+4. When the depreciation is highest out of the 99 year lease ?
+
+// [KIV] 5. What is the price difference in the premiums on high floor, mid floor and low floor 
+(of given flat floor area/sqm and given flat location)?
