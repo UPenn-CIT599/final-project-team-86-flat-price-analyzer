@@ -59,10 +59,9 @@ We hope that the tool will answer questions that users will have about a propert
     - PropertyData
     - Chart
     
-**Chart**:
+**ChartData**:
   - Responsibilities 
-    - Plots data from PropertyData into easily accessible charts and graphs
-    - Output will be used by widget
+    - Output data points for plotting in the Widget class
   - Collaborators
     - PropertyData
     - MathAnalysis 
