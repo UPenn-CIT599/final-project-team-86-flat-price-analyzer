@@ -72,7 +72,7 @@ We hope that the tool will answer questions that users will have about a propert
   - Collaborators
     - Chart
     - MathAnalysis
-    - Property Reader
+    - PropertyReader
 
 ## Suggested workflow:
  
