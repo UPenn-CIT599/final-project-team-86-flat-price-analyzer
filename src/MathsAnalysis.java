@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 public class MathsAnalysis {
 	
-	PropertyData pd; // arraylist 
-	HashMap<String, String> userInputs; // a list of user input info
+	PropertyData pd; // arraylist<Property>
+	HashMap<String, String> userInputs; // key-value pairs of user input info
 	
 	// Constructor
 	public MathsAnalysis(PropertyData pd, HashMap<String, String> userInputs) {
@@ -31,11 +31,11 @@ public class MathsAnalysis {
 	}
 	
 	/**
-	 * This is a helper method for filter out a subset of data from the full PropertyData based on floorArea.
-	 * @param floorArea
+	 * This is a helper method for filter out a subset of data from the full PropertyData based on Room Type.
+	 * @param roomType
 	 * @return subsetPd
 	 */
-	private PropertyData helperFilterOutRelevantDataFloorArea(Integer floorArea) {
+	private PropertyData helperFilterOutRelevantDataRoomType(Integer roomType) {
 		PropertyData subsetPd = new PropertyData();
 		
 		// pending to complete the code
@@ -99,7 +99,7 @@ public class MathsAnalysis {
 	 * Output the average prices for different towns
 	 * @return townAvg
 	 */
-	private HashMap<String, Double> q2calculateTownAverage() {
+	public HashMap<String, Double> q2calculateTownAverage() {
 		// Arrange this.pd into different towns
 		
 		// Calculate the average of each town
@@ -155,20 +155,19 @@ public class MathsAnalysis {
 		return remainingLease;	
 	}
 	
-	/**
-	 * To calculate the premium difference among high floor, mid floor and low floor 
-	 * @return diff
-	 */
-	private HashMap<String, Double> q5differenceBetweenFloors () {
+	public PropertyData filterAccordingToUserInputPreference() {
+		Integer roomType = Integer.parseInt(this.userInputs.get("roomType"));
+		String location = this.userInputs.get("location");
+		
+		helperFilterOutRelevantDataRoomType(roomType);
+		helperFilterOutRelevantDataLocation(location);
 		
 		// pending to complete the code
 		
-		HashMap<String, Double> diff = new HashMap<String, Double>();
+		PropertyData filteredPd = new PropertyData();
 		
-		return diff;
+		return filteredPd;
 	}
-	
-	
 	
 	/**
 	 * This is the main method to be called outside the class, it returns all the answers to 
@@ -192,8 +191,6 @@ public class MathsAnalysis {
 		// call calculation method for Q4
 		q4calculatHighestDepreciationYear();
 		
-		// call calculation method for Q5
-		q5differenceBetweenFloors();
 		
 		// pending to complete the code
 		
