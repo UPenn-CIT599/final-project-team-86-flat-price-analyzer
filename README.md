@@ -76,7 +76,7 @@ We hope that the tool will answer questions that users will have about a propert
 
 ## Suggested workflow:
  
-CSV files (Jan 2015 - current) → PropertyReader → Property + PropertyData (stores all listings in an arraylist) → User Input Parameters (under widget/ GUI) → MathAnalysis → Chart → Widget
+CSV files (Jan 2015 - current) → PropertyReader → Property + PropertyData (stores all listings in an arraylist) → User Input Parameters (under widget/ GUI) → MathAnalysis → ChartData → Widget
 
 
 ## Widget walkthrough:
