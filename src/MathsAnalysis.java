@@ -31,11 +31,11 @@ public class MathsAnalysis {
 	}
 	
 	/**
-	 * This is a helper method for filter out a subset of data from the full PropertyData based on Room Type.
+	 * This is a helper method for filter out a subset of data from the full PropertyData based on flat Type.
 	 * @param roomType
 	 * @return subsetPd
 	 */
-	private PropertyData helperFilterOutRelevantDataRoomType(Integer roomType) {
+	private PropertyData helperFilterOutRelevantDataFlatType(Integer flatType) {
 		PropertyData subsetPd = new PropertyData();
 		
 		// pending to complete the code
@@ -44,11 +44,11 @@ public class MathsAnalysis {
 	}
 	
 	/**
-	 * This is a helper method for filter out a subset of data from the full PropertyData based on location.
-	 * @param location
+	 * This is a helper method for filter out a subset of data from the full PropertyData based on town.
+	 * @param town
 	 * @return subsetPd
 	 */
-	private PropertyData helperFilterOutRelevantDataLocation(String location) {
+	private PropertyData helperFilterOutRelevantDatatown(String town) {
 		PropertyData subsetPd = new PropertyData();
 		
 		// pending to complete the code
@@ -61,10 +61,8 @@ public class MathsAnalysis {
 	 * @return diffFlatAreaGroupPd
 	 */
 	private HashMap<String, PropertyData> helperArrangeIntoDifferentFlatGroup() {
-		// Arrange this.pd into different flat area groups 
-		// (<=50 sqm, 50-70 sqm, 70-90 sqm, 90-110 sqm, 110-130 sqm, >130sqm)
-		
-		// ALTERNATIVE: use flat type instead of flat area
+		// Arrange this.pd into room type groups 
+
 		
 		// pending to complete the code
 		
@@ -79,12 +77,12 @@ public class MathsAnalysis {
 	 * @return nationalAvg
 	 */
 	private HashMap<String, Double> q1calculateNationalAverage() {
-		// Arrange this.pd into different flat area groups 
+		// Arrange this.pd into different room type groups 
 		this.helperArrangeIntoDifferentFlatGroup();
 		
 		// Calculate the average of each group 
 		
-		// Output into a Hashmap, with key = flatAreaGroup, value = averagePrice
+		// Output into a Hashmap, with key = flatType, value = averagePrice
 		
 		// pending to complete the code
 		HashMap<String, Double> nationalAvg = new HashMap<String, Double>();
@@ -115,15 +113,15 @@ public class MathsAnalysis {
 	}
 	
 	/**
-	 * This is to calculate the median price based on what user input for flat floor area and location.
+	 * This is to calculate the median price based on what user input for flat floor area and town.
 	 * Output the median price
 	 * @return median
 	 */
 	private Double q3calculateMedianPrice() {
 		
-		// get user input flat area and user input location from this.userInput
+		// get user input flat area and user input town from this.userInput
 		
-		// filter this.pd based on user input flat area and location 
+		// filter this.pd based on user input flat area and town 
 		
 		// Calculate the median of the subset from this.pd
 		
@@ -139,28 +137,31 @@ public class MathsAnalysis {
 	 * @return remainingLease
 	 */
 	private HashMap<String, Double> q4calculatHighestDepreciationYear(){
-		// Arrange this.pd into different flat area groups 
+		// Arrange this.pd into different flatType groups 
 		this.helperArrangeIntoDifferentFlatGroup();
 		
-		// For each group, get subsets of different towns
+		// For each flatType group, group into different towns
 		
-		// Rank according to the lowest price 
+		// Group again according to the remaining lease year
 		
-		// Get corresponding remaining lease 
+		// Get average price of each lease year group 
+		
+		// Get the lease year with the lowest average price 
 		
 		// pending to complete the code
 		
 		HashMap<String, Double> remainingLease = new HashMap<String, Double>();
+		// key: flatType, value: lease remaining
 		
 		return remainingLease;	
 	}
 	
 	public PropertyData filterAccordingToUserInputPreference() {
-		Integer roomType = Integer.parseInt(this.userInputs.get("roomType"));
-		String location = this.userInputs.get("location");
+		Integer flatType = Integer.parseInt(this.userInputs.get("flatType"));
+		String town = this.userInputs.get("town");
 		
-		helperFilterOutRelevantDataRoomType(roomType);
-		helperFilterOutRelevantDataLocation(location);
+		helperFilterOutRelevantDataFlatType(flatType);
+		helperFilterOutRelevantDatatown(town);
 		
 		// pending to complete the code
 		
@@ -186,7 +187,9 @@ public class MathsAnalysis {
 		q2calculateTownAverage();
 		
 		// call calculation method for Q3
+		// answerToQ3 is Double, convert to HashMap<String, Double> by using key = "q3", value = median
 		q3calculateMedianPrice();
+		
 		
 		// call calculation method for Q4
 		q4calculatHighestDepreciationYear();

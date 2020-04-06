@@ -2,9 +2,9 @@ This file contains the insightful information we want to get from the set of pro
 The information will be provided to the end-user.
 
 Questions :
-1. What is the national max, min and average price of all the flats in Singapore? 
+1. What is the national average price of the different room type flats in Singapore ? 
 
-2. What is the town max, min and average price? 
+2. What is the town average price? 
 
 3. What is the median value of the flat (user given flat floor area/sqm) at the location (user given flat location)?
 
