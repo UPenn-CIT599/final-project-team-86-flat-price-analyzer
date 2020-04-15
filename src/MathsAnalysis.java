@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 public class MathsAnalysis {
 	
 	PropertyData pd; // arraylist<Property>
@@ -32,28 +34,119 @@ public class MathsAnalysis {
 	
 	/**
 	 * This is a helper method for filter out a subset of data from the full PropertyData based on flat Type.
-	 * @param roomType
+	 * Overloading
+	 * @param flatType (1,2,3,4,5,Executive = 6, multi-gen = 7)
 	 * @return subsetPd
 	 */
-	private PropertyData helperFilterOutRelevantDataFlatType(Integer flatType) {
-		PropertyData subsetPd = new PropertyData();
+	private PropertyData helperFilterOutRelevantData(Integer intFlatType) {
+		// PropertyData subsetPd = new PropertyData();
+		String flatType = intFlatType.toString();
 		
-		// pending to complete the code
+		PropertyData oneRoom = new PropertyData();
+		PropertyData twoRoom = new PropertyData();
+		PropertyData threeRoom = new PropertyData();
+		PropertyData fourRoom = new PropertyData();
+		PropertyData fiveRoom = new PropertyData();
+		PropertyData executiveRoom = new PropertyData();
+		PropertyData multiGenRoom = new PropertyData();
 		
-		return subsetPd;
+		for (int i = 0; i < this.pd.getSize(); i++) {
+			Property currentP = this.pd.getProperty(i);
+			String roomType = currentP.getFlatType();
+			 
+			if (roomType.contains("1")) {
+				oneRoom.addProperty(currentP);
+			}
+			
+			else if (roomType.contains("2")) {
+				twoRoom.addProperty(currentP);
+			}
+			
+			else if (roomType.contains("3")) {
+				threeRoom.addProperty(currentP);
+			}
+			
+			else if (roomType.contains("4")) {
+				fourRoom.addProperty(currentP);
+			}
+			
+			else if (roomType.contains("5")) {
+				fiveRoom.addProperty(currentP);
+			}
+			
+			else if (roomType.contains("6")) {
+				executiveRoom.addProperty(currentP);
+			}
+			
+			else {
+				multiGenRoom.addProperty(currentP);
+			}
+		}
+		
+		if (flatType.contentEquals("1")) {
+			return oneRoom;
+		}
+		
+		else if (flatType.contentEquals("2")) {
+			return twoRoom;
+		}
+		
+		else if (flatType.contentEquals("3")) {
+			return threeRoom;
+		}
+		
+		else if (flatType.contentEquals("4")) {
+			return fourRoom;
+		}
+		
+		else if (flatType.contentEquals("5")) {
+			return fiveRoom;
+		}
+		
+		else if (flatType.contentEquals("6")) {
+			return executiveRoom;
+		}
+		
+		else {
+			return multiGenRoom;
+		}
+		
 	}
 	
 	/**
 	 * This is a helper method for filter out a subset of data from the full PropertyData based on town.
+	 * Overloading 
 	 * @param town
 	 * @return subsetPd
 	 */
-	private PropertyData helperFilterOutRelevantDatatown(String town) {
-		PropertyData subsetPd = new PropertyData();
+	private PropertyData helperFilterOutRelevantData(String town) {
+		/*
+		String[] townList = {"ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK",
+							"BUKIT MERAH", "BUKIT PANJANG", "BUKIT TIMAH",
+							"CENTRAL AREA", "CHOA CHU KANG", "CLEMENTI",
+							"GEYLANG", "HOUGANG", "JURONG EAST", "JURONG WEST",
+							"KALLANG/WHAMPOA", "MARINE PARADE", "PASIR RIS",
+							"PUNGGOL", "QUEENSTOWN", "SEMBAWANG", "SENGKANG","SERAGNOON"};
+		*/
+		HashMap<String, PropertyData> groupByTown = new HashMap<String, PropertyData>();
 		
-		// pending to complete the code
+		for (int i = 0; i < this.pd.getSize(); i++) {
+			Property currentP = this.pd.getProperty(i);
+			String currentTown = currentP.getTown();
+			
+			if (!groupByTown.containsKey(currentTown)) {
+				PropertyData townP = new PropertyData();
+				townP.addProperty(currentP);
+				
+				groupByTown.put(currentTown, townP);
+			}
+			
+			else {
+				groupByTown.get(currentTown).addProperty(currentP);
+			}
+		}
 		
-		return subsetPd;
+		return groupByTown.get(town.toUpperCase());
 	}
 	
 	/**
@@ -160,8 +253,8 @@ public class MathsAnalysis {
 		Integer flatType = Integer.parseInt(this.userInputs.get("flatType"));
 		String town = this.userInputs.get("town");
 		
-		helperFilterOutRelevantDataFlatType(flatType);
-		helperFilterOutRelevantDatatown(town);
+		helperFilterOutRelevantData(flatType);
+		helperFilterOutRelevantData(town);
 		
 		// pending to complete the code
 		
@@ -200,6 +293,18 @@ public class MathsAnalysis {
 		return answers;
 	}
 	
+	public static void main(String[] args) {
+		PropertyData propertyData =  PropertyReader.readFile("resale-prices.csv", true);
+		// System.out.println(propertyData.getProperty(1).toString());
+		// System.out.println(propertyData.getSize());
+		HashMap<String, String> in = new HashMap<String, String>();
+		in.put("flatType", "3");
+		in.put("town","Newton");
+		
+		MathsAnalysis m = new MathsAnalysis(propertyData, in);
+		PropertyData test = m.helperFilterOutRelevantData("bedok");
+		System.out.println(test.getSize());
+	}
 	
 
 }
