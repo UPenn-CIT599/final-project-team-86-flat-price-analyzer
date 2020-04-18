@@ -8,7 +8,7 @@ public class DataAnalyzer {
 	
 
     public DataAnalyzer(PropertyData propertyData) {
-        this.propertyData = propertyData;
+        this.propertyData = propertyData; 
     }
 
 	public static void main(String[] args) {

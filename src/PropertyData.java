@@ -17,7 +17,7 @@ public class PropertyData {
     }
 
     public Property getProperty(int index) {
-        return propertyList.get(index);
+        return propertyList.get(index); 
     }
 
     public int getSize() {

@@ -126,7 +126,7 @@ public class Property {
         String[] rooms = col[2].split(" ");
         String flatType = rooms[0];
         double sqfeet = Double.parseDouble(col[6]);
-        String[] yearsLeft = col[9].split(" ");
+        String[] yearsLeft = col[9].split(" "); 
         int remainingLease = Integer.parseInt(yearsLeft[0]);
         double price = Double.parseDouble(col[10]);
         Property currFlat = new Property(year, month, town, flatType, sqfeet, remainingLease, price);
