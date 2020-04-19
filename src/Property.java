@@ -133,6 +133,12 @@ public class Property {
 
         return currFlat;
     }
-
+    
+	
+	public static void main(String[] args) {
+		PropertyData pd = new PropertyData();
+		readFile("resale-prices.csv", true);
+		
+	}
     
 }
