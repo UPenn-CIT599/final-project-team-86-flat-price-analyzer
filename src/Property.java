@@ -81,7 +81,7 @@ public class Property {
     
 
     /**
-     * The toSring method prints out each Property instance in an arrayList
+     * The toString method prints out each Property instance in an arrayList
      */
 
     public String toString() {
@@ -134,5 +134,10 @@ public class Property {
         return currFlat;
     }
 
+//    public static void main(String[] args) {
+//		PropertyData pd = PropertyReader.readFile("resale-prices.csv", true);
+//		Property p = pd.getProperty(721695);
+//		System.out.println(p.toString());
+//	}
     
 }
