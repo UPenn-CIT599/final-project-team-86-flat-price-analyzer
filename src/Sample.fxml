@@ -275,31 +275,32 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label text="Blank" />
                   <TabPane layoutX="353.0" layoutY="45.0" prefHeight="371.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
                       <Tab text="Bank Loan">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <SplitPane dividerPositions="0.15" layoutX="115.0" layoutY="56.0" orientation="VERTICAL" prefHeight="342.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <SplitPane dividerPositions="0.29819277108433734" layoutX="115.0" layoutY="56.0" orientation="VERTICAL" prefHeight="342.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                              <children>
-                                                <Label layoutY="17.0" text="2) estimate monthly repayment amount given (a) loan amount and (b) loan tenor" />
-                                                <Label text="1) estimate eligible loan amount given (a) age, (b) income, (c) debt, (d) loan tenor;" />
+                                                <Label layoutX="14.0" layoutY="6.0" text="This is a loan calculator to estimate the monthly repayment amount given:" wrapText="true" />
+                                                <Label layoutX="14.0" layoutY="23.0" text="(a) the price of the flat" wrapText="true" />
+                                                <Label layoutX="14.0" layoutY="44.0" text="(b) the repayment period - between 1 to 25 years " wrapText="true" />
+                                                <Label layoutX="14.0" layoutY="66.0" text="(c) the annual interest rate in percentage." wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                              <children>
-                                                <SplitPane dividerPositions="0.35" layoutX="37.0" layoutY="41.0" prefHeight="286.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <SplitPane dividerPositions="0.5486577181208053" layoutX="37.0" layoutY="41.0" prefHeight="286.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <items>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="356.0">
                                                          <children>
-                                                            <GridPane layoutX="-8.0" layoutY="131.0" prefHeight="284.0" prefWidth="206.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <GridPane layoutX="14.0" prefHeight="227.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
                                                               <columnConstraints>
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="60.0" />
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="146.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="165.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="149.0" />
                                                               </columnConstraints>
                                                               <rowConstraints>
                                                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -308,36 +309,25 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                               </rowConstraints>
                                                                <children>
-                                                                  <Label text="Price (SGD)" />
-                                                                  <Label text="Tenor (y)" GridPane.rowIndex="1" />
-                                                                  <Label text="Loan %" GridPane.rowIndex="2" />
-                                                                  <Label text="Interest %" GridPane.rowIndex="3" />
-                                                                  <Slider GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                  <Slider GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                  <Slider GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                                  <TextField GridPane.columnIndex="1" />
+                                                                  <Label alignment="CENTER" contentDisplay="TOP" text="Price (SGD)" wrapText="true" />
+                                                                  <Label alignment="CENTER" contentDisplay="TOP" lineSpacing="1.0" prefHeight="58.0" prefWidth="174.0" text="Repayment Period   (between 1 to 25 years)" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1" />
+                                                                  <Label alignment="CENTER" text="Annual Interest Rate (%)" wrapText="true" GridPane.rowIndex="2" />
+                                                                  <TextField fx:id="flatPrice" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                                                                  <TextField fx:id="paymentPeriod" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="annualRate" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" text="Calculate!" textAlignment="CENTER" GridPane.rowIndex="3" />
                                                                </children>
                                                             </GridPane>
                                                          </children>
                                                       </AnchorPane>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="230.0">
                                                          <children>
-                                                            <SplitPane dividerPositions="0.5" layoutX="113.0" layoutY="81.0" prefHeight="284.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                              <items>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                                     <children>
-                                                                        <PieChart layoutX="-6.0" prefHeight="282.0" prefWidth="188.0" title="Loan vs Downpayment" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                                                        <Label layoutX="56.0" layoutY="141.0" text="Pie Chart" />
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                                     <children>
-                                                                        <PieChart prefHeight="282.0" prefWidth="188.0" title="Repayments vs interest" />
-                                                                        <Label layoutX="68.0" layoutY="141.0" text="Pie Chart" />
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                              </items>
-                                                            </SplitPane>
+                                                            <Label layoutX="30.0" layoutY="24.0" text="Estimated Monthly Installments" />
+                                                            <Label layoutX="113.0" layoutY="73.0">
+                                                               <font>
+                                                                  <Font size="36.0" />
+                                                               </font>
+                                                            </Label>
                                                          </children>
                                                       </AnchorPane>
                                                   </items>
@@ -350,87 +340,6 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                      <Tab text="HDB Loan">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <SplitPane dividerPositions="0.07" layoutX="80.0" layoutY="89.0" orientation="VERTICAL" prefHeight="342.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                             <children>
-                                                <Label text="Estimate loan amount, repayment period, monthly payments, given (a) age and (b) income of loanee(s) " />
-                                             </children>
-                                          </AnchorPane>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                             <children>
-                                                <SplitPane dividerPositions="0.5080385852090032" layoutX="79.0" layoutY="37.0" orientation="VERTICAL" prefHeight="313.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <items>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                         <children>
-                                                            <SplitPane dividerPositions="0.5" layoutX="90.0" layoutY="-13.0" prefHeight="155.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                              <items>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                                     <children>
-                                                                        <Label layoutX="38.0" layoutY="33.0" text="Loanee 1 details" />
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                                     <children>
-                                                                        <Label layoutX="111.0" layoutY="60.0" text="Loanee 2 details" />
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                              </items>
-                                                            </SplitPane>
-                                                         </children>
-                                                      </AnchorPane>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                         <children>
-                                                            <GridPane gridLinesVisible="true" layoutX="53.0" layoutY="38.0" prefHeight="150.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                              <columnConstraints>
-                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                              </columnConstraints>
-                                                              <rowConstraints>
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                              </rowConstraints>
-                                                               <children>
-                                                                  <Label text="Scenario" />
-                                                                  <Label text="Prudent" GridPane.columnIndex="1" />
-                                                                  <Label text="Moderate" GridPane.columnIndex="2" />
-                                                                  <Label text="Maximum" GridPane.columnIndex="3" />
-                                                                  <Label text="Loan Amount" GridPane.rowIndex="1" />
-                                                                  <Label text="Repayment Period" GridPane.rowIndex="2" />
-                                                                  <Label text="Monthly Installment " GridPane.rowIndex="3" />
-                                                                  <Label text="Interest Payable" GridPane.rowIndex="4" />
-                                                               </children>
-                                                            </GridPane>
-                                                         </children>
-                                                      </AnchorPane>
-                                                  </items>
-                                                </SplitPane>
-                                             </children>
-                                          </AnchorPane>
-                                      </items>
-                                    </SplitPane>
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </Tab>
-                        <Tab text="CPF Usage">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Label text="Label" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
                     </tabs>
                   </TabPane>
                </children>
