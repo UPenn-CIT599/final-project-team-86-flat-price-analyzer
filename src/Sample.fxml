@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CalculatorController">
   <tabs>
     <Tab text="Home">
       <content>
@@ -312,10 +312,15 @@
                                                                   <Label alignment="CENTER" contentDisplay="TOP" text="Price (SGD)" wrapText="true" />
                                                                   <Label alignment="CENTER" contentDisplay="TOP" lineSpacing="1.0" prefHeight="58.0" prefWidth="174.0" text="Repayment Period   (between 1 to 25 years)" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1" />
                                                                   <Label alignment="CENTER" text="Annual Interest Rate (%)" wrapText="true" GridPane.rowIndex="2" />
-                                                                  <TextField fx:id="flatPrice" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                                                                  <TextField fx:id="flatPrice" prefHeight="27.0" prefWidth="179.0" GridPane.columnIndex="1" />
                                                                   <TextField fx:id="paymentPeriod" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                                   <TextField fx:id="annualRate" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                  <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" text="Calculate!" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                                                  <Button fx:id="calculatePrice" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#calculate" prefHeight="28.0" prefWidth="80.0" text="Calculate!" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                                                  <Label fx:id="statusLabel" prefHeight="34.0" prefWidth="136.0" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                                     <font>
+                                                                        <Font name="System Bold Italic" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
                                                                </children>
                                                             </GridPane>
                                                          </children>
@@ -323,9 +328,9 @@
                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="230.0">
                                                          <children>
                                                             <Label layoutX="30.0" layoutY="24.0" text="Estimated Monthly Installments" />
-                                                            <Label layoutX="113.0" layoutY="73.0">
+                                                            <Label fx:id="monthlyInstallment" contentDisplay="CENTER" layoutX="46.0" layoutY="41.0" prefHeight="43.0" prefWidth="135.0" textAlignment="CENTER" textFill="#1100ff">
                                                                <font>
-                                                                  <Font size="36.0" />
+                                                                  <Font name="System Bold" size="20.0" />
                                                                </font>
                                                             </Label>
                                                          </children>

@@ -1,5 +1,3 @@
-package application;
-
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -8,6 +6,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 enum Frequency {
 	DAILY, WEEKLY, MONTHLY, YEARLY
@@ -48,6 +52,26 @@ public class MyController {
 	
 	@FXML
 	private MenuButton mbMaxPrice;
+	
+	@FXML
+	private TextField flatPrice;
+	
+	@FXML
+	private TextField paymentPeriod;
+	
+	@FXML
+	private TextField annualRate;
+	
+	@FXML
+	private Label statusLabel;
+	
+	@FXML
+	private Label monthlyInstallment;
+
+	@FXML
+	private Button calculatePrice;
+	
+	
 	
 	public MyController() {
         System.out.println("first");
@@ -299,5 +323,122 @@ public class MyController {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + aggOp);
 		}
+				
 	}
+
+	/**
+	 * This is a helper method that checks if a text input is an integer
+	 *  using the try... catch method. If the integer is valid, it returns
+	 *  true. Else, it returns false.
+	 */
+	
+	  public static boolean isInteger(String s) {
+	      boolean isValidInteger = false;
+	      try
+	      {
+	         Integer.parseInt(s);	 
+	         isValidInteger = true;
+	      }
+	      catch (NumberFormatException e)
+	      {
+	    	  //do nothing
+	      }
+	 
+	      return isValidInteger;
+	   }
+	  
+		
+	  /**
+		 * This is a helper method that checks if a text input is a valid float
+		 *  using the try... catch method. If the float is valid, it returns
+		 *  true. Else, it returns false.
+		 */
+		  
+		
+	  public static boolean isFloat(String s) {
+	      boolean isValidFloat = false;
+	      try
+	      {
+	         Double.parseDouble(s);	 
+	         isValidFloat = true;
+	      }
+	      catch (NumberFormatException e)
+	      {
+	    	  //do nothing
+	      }
+	 
+	      return isValidFloat;
+	   }
+	
+	
+	/**
+	 * This method calculates the monthly installment for a user, and can be found
+	 * under the "Bank Loan" tab. It takes in user input from the flatPrice, paymentPeriod,
+	 * annualRate text fields and checks if the inputs are all valid. If they are,
+	 * the monthly installment is calculated using LoanCalculator's getInstallment method
+	 * and gets printed on the monthlyInstallment label.
+	 */
+
+	  public void calculate(ActionEvent event) {  
+			
+			int price = -1;
+			double rate = -1;
+			int numOfYears = -1;
+			boolean validPrice;
+			boolean validRate;
+			boolean validYears;				
+			
+			//checks if price, rate and numOfYears are valid
+			
+			  validPrice = isInteger(flatPrice.getText());
+			  validRate = isFloat(annualRate.getText());
+			  validYears = isInteger(paymentPeriod.getText());
+				
+			if (validPrice) {
+				price = Integer.parseInt(flatPrice.getText());
+				
+				if (price <= 0) {
+					validPrice = false;
+					statusLabel.setText("Enter a positive number for price.");
+				}
+				
+			}
+			
+			else {
+				statusLabel.setText("Please enter integers for price.");
+			}
+			
+			if (validYears) {
+				numOfYears = Integer.parseInt(paymentPeriod.getText());	
+				
+				if ((numOfYears < 1) || (numOfYears > 25)) {
+					validYears = false;
+					statusLabel.setText("Enter a year between 1 and 25.");
+				}
+			}
+			
+			else {
+				statusLabel.setText("Enter numbers only for repayment period.");
+			}
+			
+			if (validRate) {
+				rate = Double.parseDouble(annualRate.getText());	
+
+				if ((rate <= 0) || (rate > 100)) {
+					validRate = false;
+					statusLabel.setText("Enter an interest rate between > 0 and < 100.");
+				} 
+			}
+			
+			else {
+				statusLabel.setText("Please enter numbers only for interest rate.");
+			}
+			
+			if (validPrice && validRate && validYears) {
+				String installment = LoanCalculator.getInstallment(price, rate, numOfYears);
+				statusLabel.setText(" ");			
+				monthlyInstallment.setText(installment);			
+			}
+			
+		}
 }

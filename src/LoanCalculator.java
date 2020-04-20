@@ -12,8 +12,8 @@ public class LoanCalculator {
 	
 	/**
 	 * This class calculates the average monthly mortgage installment  
-	 * given a flat price, interest rate (in percent) and the repayment period (in years)
-	 * using the PMT formula
+	 * given a flat price, interest rate (in percent) and the repayment period 
+	 * (in years) using the PMT formula
 	 */
 	
 	public static String getInstallment(long price, double annualRate, int year) {
@@ -33,9 +33,9 @@ public class LoanCalculator {
 		return String.format("$%.2f", installment); 
 	}
 	
-	
-	public static void main(String[] args) {
-		System.out.println(LoanCalculator.getInstallment(200000, 2.6, 10));
-	}
+//	
+//	public static void main(String[] args) {
+//		System.out.println(LoanCalculator.getInstallment(200000, 2.6, 10));
+//	}
 	
 }
