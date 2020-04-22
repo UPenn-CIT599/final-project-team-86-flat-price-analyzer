@@ -22,7 +22,8 @@ public class Widget extends Application {
 			e.printStackTrace();
 		}
 	}
-//	
+//	/Users/admin/GitHub/final-project-team-86-flat-price-analyzer/src/ 
+// 11.0.1
 	public static void main(String[] args) {
 		launch(args);
 	}

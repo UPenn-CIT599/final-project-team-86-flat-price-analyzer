@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CalculatorController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CalculatorController">
   <tabs>
     <Tab text="Home">
       <content>
@@ -28,7 +40,7 @@
                <children>
                   <TabPane layoutX="174.0" layoutY="123.0" prefHeight="371.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                      <Tab text="All">
+                      <Tab onSelectionChanged="#answersToAnalysisQnAllTab" text="All">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -48,7 +60,14 @@
                                           </AnchorPane>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="168.0" SplitPane.resizableWithParent="false">
                                              <children>
-                                                <Label layoutX="49.0" layoutY="147.0" text="Some stats" />
+                                                <Label fx:id="q1All" layoutX="6.0" layoutY="20.0" prefHeight="94.0" prefWidth="164.0" wrapText="true">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font></Label>
+                                                <Label fx:id="q3All" layoutX="6.0" layoutY="130.0" prefHeight="94.0" prefWidth="164.0" wrapText="true">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font></Label>
                                              </children>
                                           </AnchorPane>
                                        </items>
@@ -57,7 +76,7 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                      <Tab text="3-room">
+                      <Tab onSelectionChanged="#answersToAnalysisQn3RoomTab" text="3-Room">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -77,16 +96,17 @@
                                           </AnchorPane>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="168.0" SplitPane.resizableWithParent="false">
                                              <children>
-                                                <Label layoutX="49.0" layoutY="147.0" text="Some stats" />
-                                             </children>
-                                          </AnchorPane>
+                                                <Label fx:id="q1Room3" layoutX="6.0" layoutY="14.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q3Room3" layoutX="6.0" layoutY="110.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q4Room3" layoutX="6.0" layoutY="210.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                             </children></AnchorPane>
                                        </items>
                                     </SplitPane>
                                  </children>
                               </AnchorPane>
                         </content>
                       </Tab>
-                        <Tab text="4-room">
+                        <Tab onSelectionChanged="#answersToAnalysisQn4RoomTab" text="4-Room">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -106,7 +126,9 @@
                                           </AnchorPane>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="168.0" SplitPane.resizableWithParent="false">
                                              <children>
-                                                <Label layoutX="49.0" layoutY="147.0" text="Some stats" />
+                                                <Label fx:id="q1Room4" layoutX="6.0" layoutY="14.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q3Room4" layoutX="6.0" layoutY="110.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q4Room4" layoutX="6.0" layoutY="210.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                        </items>
@@ -115,7 +137,7 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="5-room">
+                        <Tab onSelectionChanged="#answersToAnalysisQn5RoomTab" text="5-Room">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -135,7 +157,9 @@
                                           </AnchorPane>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="168.0" SplitPane.resizableWithParent="false">
                                              <children>
-                                                <Label layoutX="49.0" layoutY="147.0" text="Some stats" />
+                                                <Label fx:id="q1Room5" layoutX="6.0" layoutY="14.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q3Room5" layoutX="6.0" layoutY="110.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q4Room5" layoutX="6.0" layoutY="210.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                        </items>
@@ -144,7 +168,7 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Executive / 3-Gen">
+                        <Tab onSelectionChanged="#answersToAnalysisQnExecutiveRoomTab" text="Executive-Room">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -164,7 +188,9 @@
                                           </AnchorPane>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="168.0" SplitPane.resizableWithParent="false">
                                              <children>
-                                                <Label layoutX="49.0" layoutY="147.0" text="Some stats" />
+                                                 <Label fx:id="q1RoomExe" layoutX="6.0" layoutY="14.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q3RoomExe" layoutX="6.0" layoutY="110.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                                <Label fx:id="q4RoomExe" layoutX="6.0" layoutY="210.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                        </items>
@@ -179,7 +205,7 @@
             </AnchorPane>
         </content>
       </Tab>
-    <Tab text="Location Insights">
+    <Tab onSelectionChanged="#helperStartCombo" text="Location Insights">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -236,7 +262,7 @@
                                     <Label alignment="CENTER" prefHeight="17.0" prefWidth="114.0" text="Filters:" />
                                  </children>
                               </GridPane>
-                              <ComboBox layoutX="99.0" layoutY="2.0" prefHeight="25.0" prefWidth="501.0" />
+                              <ComboBox fx:id="locationSelection" layoutX="99.0" layoutY="2.0" onAction="#answersToAnalysisQnLocation" prefHeight="25.0" prefWidth="501.0" />
                               <Label alignment="CENTER" layoutY="6.0" prefHeight="17.0" prefWidth="99.0" text="Location:" />
                            </children>
                         </AnchorPane>
@@ -258,8 +284,8 @@
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="Do you know?" />
-                                          <Label layoutY="26.0" text="&lt;Some insight&gt;" />
+                                          <Label fx:id="q2Location" layoutX="6.0" layoutY="20.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
+                                          <Label fx:id="q3Location" layoutX="6.0" layoutY="130.0" prefHeight="94.0" prefWidth="164.0" wrapText="true" />
                                        </children>
                                     </AnchorPane>
                                 </items>
