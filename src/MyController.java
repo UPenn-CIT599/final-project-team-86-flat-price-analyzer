@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -70,6 +72,12 @@ public class MyController {
 
 	@FXML
 	private Button calculatePrice;
+	
+	// Maths Analysis
+	@FXML
+	private Label q1All;
+	
+	PropertyData inputPropertyData = PropertyReader.readFile("resale_test.csv", true);
 	
 	
 	
@@ -441,4 +449,18 @@ public class MyController {
 			}
 			
 		}
+	  
+	  // Methods to be used with Maths Analysis 
+	  
+	  
+	 public void answersToAnalysisQn(ActionEvent event) {
+		  HashMap<String, String> inForAllTab = new HashMap<String, String>();
+		  inForAllTab.put("flatType", "0");
+		  inForAllTab.put("town", "ALL");
+		  
+		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForAllTab);
+		  
+		  q1All.setText("Average Price");
+		  System.out.println("AVerage Price");
+	  }
 }

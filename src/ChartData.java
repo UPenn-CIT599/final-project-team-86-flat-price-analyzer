@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -12,25 +13,83 @@ public class ChartData {
 	public ChartData(PropertyData pd, HashMap<String, String> userInputs) {
 		this.pd = pd;
 		this.m = new MathsAnalysis(pd, userInputs);
+		// userInput: 
+		// key1:"flatType" - value1: any integer in String format from "0" to "7" 
+		// "0" means select all flatType, 1 - 7 means select respective flatType
+		// key2: "town" - value2: "ALL" or "ANG MO KIO" etc
 		this.userInputs = userInputs;
 	}
 	
 	/**
+	 * This is a helper method for calculating the average of a given propertydata
+	 * 
+	 * @param prices
+	 * @return averagePrice
+	 */
+	private Double helperCalculateAveragePrice(PropertyData pd) {
+		Double averagePrice = 0.0;
+		Double sum = 0.0;
+
+		for (int i = 0; i < pd.getSize(); i++) {
+			double priceAUnit = pd.getProperty(i).getPrice();
+			sum += priceAUnit;
+		}
+
+		averagePrice = sum / pd.getSize();
+		return averagePrice;
+	}
+	
+	/**
 	 * Output data points of historical prices for the type of flat, location the user is interested in.
-	 * The data will be used in Widget class to plot graph.
-	 * @param numOfYearOfData
+	 * The data will be used in Widget class to plot graph
 	 * @return histPrices
 	 */
-	public HashMap<String, Double> dataPointsForHistoricalPrices (int numOfYearOfData){
+	public HashMap<String, Double> dataPointsForHistoricalPrices (){
 		// Get subset of data according to user input preferences
-		this.m.filterAccordingToUserInputPreference();
-		
-		
-		// Get subset of data for only the specific numOfYearOfData 
-		// (eg, 1 year, 2 years or 5 years)
-		
-		// pending to complete the code
+		PropertyData subsetPd = this.m.filterAccordingToUserInputPreference();
+	
+		HashMap<String, PropertyData> monthlyHistData = new HashMap<String, PropertyData>();
 		HashMap<String, Double> histPrices = new HashMap<String, Double>();
+		
+		for (int i = 0; i < subsetPd.getSize(); i++) {
+			Property currentP = subsetPd.getProperty(i);
+			String currentYear = Integer.toString(currentP.getYear());
+			Integer month = currentP.getMonth();
+			String currentMonth = "";
+			
+			if (month < 10) {
+				currentMonth = "0"+ Integer.toString(month);
+			}
+			
+			else {
+				currentMonth = Integer.toString(month);
+			}
+			
+			String currentYearAndMonth = currentMonth+currentYear ;
+	
+			if (!monthlyHistData.containsKey(currentYearAndMonth)) {
+				PropertyData p = new PropertyData();
+				p.addProperty(currentP);
+
+				monthlyHistData.put(currentYearAndMonth, p);
+			}
+
+			else {
+				monthlyHistData.get(currentYearAndMonth).addProperty(currentP);
+			}
+		}
+		
+		// Get average price for every month's data, output to histPrices
+		
+		// System.out.println(monthlyHistData.keySet());
+		
+		for (String key : monthlyHistData.keySet()) {
+			// System.out.println(key);
+			Double monthlyAvgPrice = this.helperCalculateAveragePrice(monthlyHistData.get(key));
+			histPrices.put(key, monthlyAvgPrice);
+		}
+		
+		// System.out.println(histPrices.toString());
 		
 		return histPrices;
 	}
@@ -42,8 +101,22 @@ public class ChartData {
 	 */
 	public HashMap<String, Double> dataPointsForAvgPricesOverLocation(){
 		HashMap<String, Double> avgPriceOverLocation = this.m.q2calculateTownAverage();
-		
+		// System.out.println(avgPriceOverLocation.toString());
 		return avgPriceOverLocation;
+	}
+	
+	
+	// for testing
+	public static void main(String[] args) {
+		PropertyData propertyData = PropertyReader.readFile("resale-prices.csv", true);
+		HashMap<String, String> in = new HashMap<String, String>();
+		in.put("flatType", "0");
+		in.put("town", "ALL");
+		
+		ChartData cd = new ChartData(propertyData, in);
+		
+		cd.dataPointsForHistoricalPrices();
+		cd.dataPointsForAvgPricesOverLocation();
 	}
 
 }

@@ -1,7 +1,12 @@
+import java.util.HashMap;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -131,5 +136,249 @@ public class CalculatorController {
 		}
 		
 	}
+	 
+	  
+	  
+	// START OF Maths Analysis
+		@FXML
+		private Label q1All;
+		
+		@FXML
+		private Label q3All;
+		
+		@FXML
+		private Label q1Room3;
+		
+		@FXML
+		private Label q3Room3;
+		
+		@FXML
+		private Label q4Room3;
+		
+		@FXML
+		private Label q1Room4;
+		
+		@FXML
+		private Label q3Room4;
+		
+		@FXML
+		private Label q4Room4;
+		
+		@FXML
+		private Label q1Room5;
+		
+		@FXML
+		private Label q3Room5;
+		
+		@FXML
+		private Label q4Room5;
+		
+		@FXML
+		private Label q1RoomExe;
+		
+		@FXML
+		private Label q3RoomExe;
+		
+		@FXML
+		private Label q4RoomExe;
+		
+		@FXML
+		private ComboBox<String> locationSelection;
+		
+		@FXML
+		private Label q2Location;
+		
+		@FXML
+		private Label q3Location;
+		
+		// Global Variables used for the methods below
+		PropertyData inputPropertyData = PropertyReader.readFile("resale-prices.csv", true);
+		ObservableList<String> townList = FXCollections.observableArrayList("ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK", "BUKIT MERAH", "BUKIT PANJANG",
+				"BUKIT TIMAH", "CENTRAL AREA", "CHOA CHU KANG", "CLEMENTI", "GEYLANG", "HOUGANG", "JURONG EAST",
+				"JURONG WEST", "KALLANG/WHAMPOA", "MARINE PARADE", "PASIR RIS", "PUNGGOL", "QUEENSTOWN", "SEMBAWANG",
+				"SENGKANG", "SERAGNOON" );
+	  
+	 // Methods to be used with Maths Analysis 
+	 /**
+	  * This method is to provide text content for the "All" tab under "Property Index"
+	  */
+	 public void answersToAnalysisQnAllTab() {
+		  HashMap<String, String> inForTab = new HashMap<String, String>();
+		  inForTab.put("flatType", "0");
+		  inForTab.put("town", "ALL");
+		  
+		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		 
+		  q1All.setText("Average Price for All Properties (SGD): " + Math.round(m1.answersToInsightQuestions().get("q1").get("ALL")));
+		  q3All.setText("Median Price for All Properties (SGD): " + Math.round(m1.answersToInsightQuestions().get("q3").get("q3")));
+	  }
+	 
+	 
+	 /**
+	  * This is a helper method to check if the answers from the dataset is null 
+	  * @param answersToBeChecked
+	  * @return outcomes
+	  */
+	 public HashMap<String, String> helperCheckIfAnswerIsNull(MathsAnalysis m1, String flatType, String town){
+		 HashMap<String, String> outcomes = new HashMap<String, String>();
+		 
+		 String ans1 = "";
+		 String ans2 = "";
+		 String ans3 = "";
+		 String ans4 = "";
+		 
+		 
+		 // Answer to Q1
+		 if (!(m1.answersToInsightQuestions().get("q1").get(flatType) == null)) {
+			 Double A1 = m1.answersToInsightQuestions().get("q1").get(flatType);
+			 ans1 = Long.toString(Math.round(A1));
+			 
+		 }
+		 else {
+			 ans1 = "N.A.";
+		}
+		 
+		 // Answer to Q2
+		 if (!(m1.answersToInsightQuestions().get("q2").get(town) == null)) {
+			 Double A2 = m1.answersToInsightQuestions().get("q2").get(town);
+			 ans2 = Long.toString(Math.round(A2));
+			 
+		 }
+		 else {
+			 ans2 = "N.A.";
+		}
+		 
+		// Answer to Q3
+		 if (m1.answersToInsightQuestions().get("q3").get("q3") == 0.0) {
+			 ans3 = "N.A.";
+		 }
+		 else {
+			 Double A3 = m1.answersToInsightQuestions().get("q3").get("q3");
+			 ans3 = Long.toString(Math.round(A3));
+		}
+		 
+		// Answer to Q4
+		 if (flatType.contentEquals("ALL") ) {
+			 if (m1.answersToInsightQuestions().get("q4").get(flatType) == 0.0) {
+				 ans4 = "N.A.";
+			 }
+			 else {
+				 Double A4 = m1.answersToInsightQuestions().get("q4").get(flatType);
+				 ans4 = Long.toString(Math.round(A4));
+			}
+		}
+		 
+		  outcomes.put("ans1", ans1);
+		  outcomes.put("ans2", ans2);
+		  outcomes.put("ans3", ans3);
+		  outcomes.put("ans4", ans4);
+		  
+		 
+		 return outcomes;
+	 }
+	 
+	 /**
+	  * This method is to provide text content for the "3-room" tab under "Property Index"
+	  */
+	 public void answersToAnalysisQn3RoomTab() {
+		  HashMap<String, String> inForTab = new HashMap<String, String>();
+		  inForTab.put("flatType", "3");
+		  inForTab.put("town", "ALL");
+		  
+		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "3", "ALL");		 
+		  
+		  
+		  q1Room3.setText("Average Price for 3-Room Properties (SGD): " + outcomes.get("ans1"));
+		  q3Room3.setText("Median Price for 3-Room Properties (SGD): " + outcomes.get("ans3"));
+		  q4Room3.setText("Depreciation for 3-room properties is highest when the property has " + outcomes.get("ans4") + " years of remaining lease.");
+	  }
+	 
+	 /**
+	  * This method is to provide text content for the "4-room" tab under "Property Index"
+	  */
+	 public void answersToAnalysisQn4RoomTab() {
+		  HashMap<String, String> inForTab = new HashMap<String, String>();
+		  inForTab.put("flatType", "4");
+		  inForTab.put("town", "ALL");
+		  
+		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "4", "ALL");	
+		  
+		  
+		  q1Room4.setText("Average Price for 4-Room Properties (SGD): " + outcomes.get("ans1"));	  
+		  q3Room4.setText("Median Price for 4-Room Properties (SGD): " + outcomes.get("ans3"));
+		  q4Room4.setText("Depreciation for 4-room property is the highest when the property has " + outcomes.get("ans4") + " years of remaining lease.");
+	  }
+	 
+	 /**
+	  * This method is to provide text content for the "5-room" tab under "Property Index"
+	  */
+	 public void answersToAnalysisQn5RoomTab() {
+		  HashMap<String, String> inForTab = new HashMap<String, String>();
+		  inForTab.put("flatType", "5");
+		  inForTab.put("town", "ALL");
+		  
+		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "5", "ALL");	
+		  
+		  
+		  q1Room5.setText("Average Price for 5-Room Properties (SGD): " + outcomes.get("ans1"));	  
+		  q3Room5.setText("Median Price for 5-Room Properties (SGD): " + outcomes.get("ans3"));
+		  q4Room5.setText("Depreciation for 5-room property is the highest when the property has " + outcomes.get("ans4") + " years of remaining lease.");
+	  }
+	 
+	 /**
+	  * This method is to provide text content for the "Executive Room" tab under "Property Index"
+	  */
+	 public void answersToAnalysisQnExecutiveRoomTab() {
+		  HashMap<String, String> inForTab = new HashMap<String, String>();
+		  inForTab.put("flatType", "6");
+		  inForTab.put("town", "ALL");
+		  
+		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "6", "ALL");	
+		  
+		  
+		  q1RoomExe.setText("Average Price for Executive-Room Properties (SGD): " + outcomes.get("ans1"));	  
+		  q3RoomExe.setText("Median Price for Executive-Room Properties (SGD): " + outcomes.get("ans3"));
+		  q4RoomExe.setText("Depreciation for Executive-room property is the highest when the property has " + outcomes.get("ans4") + " years of remaining lease.");
+	  }
+	 
+	 /**
+	  * This method is to get the initialise locationSelection
+	  */
+	 public void helperStartCombo() {
+		 locationSelection.setItems(townList);
+	
+	 }
+	 
+	 /**
+	  * This method is to get the user's selection of the location information 
+	  */
+	 public String helperComboChanged() {
+		 String town = locationSelection.getValue();
+		 
+		 return town;
+	 }
+	 
+	 /**
+	  * This method is to provide text content for the "Location Insights" sheet
+	  */
+	 public void answersToAnalysisQnLocation() {
+	  
+		  HashMap<String, String> inForTab = new HashMap<String, String>();
+		  inForTab.put("flatType", "0"); // for all flat types
+		  inForTab.put("town", this.helperComboChanged());
+		  
+		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "0", inForTab.get("town"));	
+		  
+		  q2Location.setText("Average Price for All Properties in the selected town (SGD): " + outcomes.get("ans2"));	  
+		  q3Location.setText("Median Price for All Properties (SGD): " + outcomes.get("ans3"));
+		 
+	  }
+	 
+	 
 
 }

@@ -113,7 +113,7 @@ public class MathsAnalysis {
 		
 		// convert intFlatType into String
 		String flatSize = "";
-
+		/*
 		if (intFlatType == (6)) {
 			flatSize = "EXECUTIVE";
 		}
@@ -125,7 +125,8 @@ public class MathsAnalysis {
 		else {
 			flatSize = intFlatType.toString();
 		}
-		
+		*/
+		flatSize = intFlatType.toString();
 		
 		// get the subset 
 		if (intFlatType != 0) {
@@ -179,8 +180,9 @@ public class MathsAnalysis {
 
 		// Calculate the average of each group
 		String type = "";
+		
 		for (int i = 1; i < 8; i++) {
-
+			/*
 			if (i == 6) {
 				type = "EXECUTIVE";
 			}
@@ -192,7 +194,8 @@ public class MathsAnalysis {
 			else {
 				type = Integer.toString(i);
 			}
-
+			*/
+			type = Integer.toString(i);
 			if (diffFlatSizeGroupPd.get(type) != null) {
 				double avgPrice = this.helperCalculateAveragePrice(diffFlatSizeGroupPd.get(type));
 				nationalAvg.put(type, avgPrice);
@@ -245,25 +248,30 @@ public class MathsAnalysis {
 		
 		ArrayList<Double> priceArray = new ArrayList<Double>();
 		Double median = 0.0;
-		
-		for (int i = 0; i < filteredResult.getSize(); i++) {
-			priceArray.add(filteredResult.getProperty(i).getPrice());
-			
+		if (filteredResult == null) {
+			median = 0.0;
 		}
-		
-		// Calculate the median of the resulted price arraylist
-		Collections.sort(priceArray);
-		int length = priceArray.size();
-		
-		if (length > 0) {
-			if (length % 2 == 0) {
+		else {
+			for (int i = 0; i < filteredResult.getSize(); i++) {
+				priceArray.add(filteredResult.getProperty(i).getPrice());
 				
-				median = (priceArray.get(length / 2 - 1) + priceArray.get(length / 2 )) / 2.0;
 			}
 			
-			else {
-				median = (double) priceArray.get(length / 2);
+			// Calculate the median of the resulted price arraylist
+			Collections.sort(priceArray);
+			int length = priceArray.size();
+			
+			if (length > 0) {
+				if (length % 2 == 0) {
+					
+					median = (priceArray.get(length / 2 - 1) + priceArray.get(length / 2 )) / 2.0;
+				}
+				
+				else {
+					median = (double) priceArray.get(length / 2);
+				}
 			}
+			
 		}
 		
 		
@@ -286,11 +294,14 @@ public class MathsAnalysis {
 		String type = "";
 		
 		for (int i = 1; i < 8; i++) {
+			/*
 			if (i == 6) {type = "EXECUTIVE";}
 
 			else if (i == 7) {type = "MULTI-GENERATION";}
 
 			else {type = Integer.toString(i);}
+			*/
+			type = Integer.toString(i);
 			// roomPd: contains data for one specific flatType
 			PropertyData roomPd = diffFlatSizeGroupPd.get(type);
 		
@@ -344,6 +355,8 @@ public class MathsAnalysis {
 			remainingLease.put(type, lowestLeaseYear);
 			
 		}
+		
+		//remainingLease.put("6", remainingLease.get("EXECUTIVE"));
 
 		return remainingLease;
 	}
@@ -412,11 +425,11 @@ public class MathsAnalysis {
 		return answers;
 	}
 
-	/*
+	
 	// This is for testing MathsAnalysis class
 	public static void main(String[] args) {
-		// PropertyData propertyData = PropertyReader.readFile("resale-prices.csv", true);
-		PropertyData propertyData = PropertyReader.readFile("resale_test.csv", true);
+		PropertyData propertyData = PropertyReader.readFile("resale-prices.csv", true);
+		// PropertyData propertyData = PropertyReader.readFile("resale_test.csv", true);
 		// System.out.println(propertyData.getProperty(1).toString());
 		// System.out.println(propertyData.getSize());
 		HashMap<String, String> in = new HashMap<String, String>();
@@ -430,10 +443,11 @@ public class MathsAnalysis {
 		// System.out.println(q1.toString());
 
 		HashMap<String, HashMap<String, Double>> answers = m.answersToInsightQuestions();
-		 // System.out.println(Math.round(answers.get("q1").get("3")));
-		// System.out.println(answers.get("q3").get("q3"));
-		// System.out.println(answers.get("q4").get("3"));
+		System.out.println(answers.get("q1"));
+		System.out.println(answers.get("q2"));
+		System.out.println(answers.get("q3"));
+		System.out.println(answers.get("q4"));
 		
 	}
-	 */
+	
 }
