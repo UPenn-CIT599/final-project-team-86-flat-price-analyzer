@@ -258,7 +258,7 @@ public class CalculatorController {
 		}
 		 
 		// Answer to Q4
-		 if (flatType.contentEquals("ALL") ) {
+		 if (!flatType.contentEquals("0") ) {
 			 if (m1.answersToInsightQuestions().get("q4").get(flatType) == 0.0) {
 				 ans4 = "N.A.";
 			 }
