@@ -6,8 +6,8 @@ public class MathsAnalysis {
 
 	PropertyData pd; // arraylist<Property>
 	HashMap<String, String> userInputs; // key-value pairs of user input info
-										// <flatType> - <1,2,3,4,5,6,7> (String)
-										// <town> - <CAPITAL LETTER OF TOWN NAME> (String)
+										// <flatType> - 1,2,3,4,5,6,7, 0 (String)
+										// <town> - CAPITAL LETTER OF TOWN NAME or ALL(String)
 	
 	String[] townList = { "ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK", "BUKIT MERAH", "BUKIT PANJANG",
 			"BUKIT TIMAH", "CENTRAL AREA", "CHOA CHU KANG", "CLEMENTI", "GEYLANG", "HOUGANG", "JURONG EAST",
@@ -103,13 +103,15 @@ public class MathsAnalysis {
 	 * This is a helper method for filter out a subset of data from the full
 	 * PropertyData based on flat Type. Overloading
 	 * 
-	 * @param flatType (1,2,3,4,5,Executive = 6, multi-gen = 7)
+	 * @param flatType (1,2,3,4,5,Executive = 6, multi-gen = 7, ALL = 0)
 	 * @return subsetPd
 	 */
 	private PropertyData helperFilterOutRelevantData(Integer intFlatType) {
 
 		HashMap<String, PropertyData> diffFlatSizeGroupPd = this.helperArrangeIntoDifferentFlatSizeGroup();
-
+		PropertyData subsetPd = new PropertyData();
+		
+		// convert intFlatType into String
 		String flatSize = "";
 
 		if (intFlatType == (6)) {
@@ -123,8 +125,16 @@ public class MathsAnalysis {
 		else {
 			flatSize = intFlatType.toString();
 		}
-
-		PropertyData subsetPd = diffFlatSizeGroupPd.get(flatSize);
+		
+		
+		// get the subset 
+		if (intFlatType != 0) {
+			subsetPd = diffFlatSizeGroupPd.get(flatSize);
+		}
+		
+		else {
+			subsetPd = this.pd;
+		}
 
 		return subsetPd;
 
@@ -140,7 +150,16 @@ public class MathsAnalysis {
 	private PropertyData helperFilterOutRelevantData(String town) {
 
 		HashMap<String, PropertyData> diffFlatLocationGroupPd = this.helperArrangeIntoDifferentFlatLocationGroup();
-		PropertyData subsetPd = diffFlatLocationGroupPd.get(town.toUpperCase());
+		PropertyData subsetPd = new PropertyData();
+		
+		if (!town.contentEquals("ALL")) {
+			subsetPd = diffFlatLocationGroupPd.get(town.toUpperCase());
+		}
+		
+		else {
+			subsetPd = this.pd;
+		}
+		
 
 		return subsetPd;
 	}
@@ -179,7 +198,10 @@ public class MathsAnalysis {
 				nationalAvg.put(type, avgPrice);
 			}
 		}
-
+		
+		double allAvgPrice = this.helperCalculateAveragePrice(this.pd);
+		nationalAvg.put("ALL", allAvgPrice);
+		
 		return nationalAvg;
 	}
 
@@ -328,8 +350,8 @@ public class MathsAnalysis {
 
 	/**
 	 * This is a method that returns the filtered data based on user's input:
-	 * flatType:  <1,2,3,4,5,6,7> (String)
-	 * town: <CAPITAL LETTER OF TOWN NAME> (String)
+	 * flatType:  <1,2,3,4,5,6,7,0> (String)
+	 * town: <CAPITAL LETTER OF TOWN NAME or ALL> (String)
 	 * @return
 	 */
 	public PropertyData filterAccordingToUserInputPreference() {
@@ -339,14 +361,21 @@ public class MathsAnalysis {
 		PropertyData filteredFromFlatType = this.helperFilterOutRelevantData(flatType);
 		PropertyData filteredPd = new PropertyData();
 		
-		for (int i = 0; i < filteredFromFlatType.getSize(); i++) {
-			Property currentP = filteredFromFlatType.getProperty(i);
-			String currentTown = currentP.getTown();
-			
-			if (currentTown.contentEquals(town)) {
-				filteredPd.addProperty(currentP);
+		if (!town.contentEquals("ALL")) {
+			for (int i = 0; i < filteredFromFlatType.getSize(); i++) {
+				Property currentP = filteredFromFlatType.getProperty(i);
+				String currentTown = currentP.getTown();
+				
+				if (currentTown.contentEquals(town)) {
+					filteredPd.addProperty(currentP);
+				}
 			}
 		}
+		
+		else {
+			filteredPd = filteredFromFlatType;
+		}
+		
 		return filteredPd;
 	}
 
@@ -391,8 +420,8 @@ public class MathsAnalysis {
 		// System.out.println(propertyData.getProperty(1).toString());
 		// System.out.println(propertyData.getSize());
 		HashMap<String, String> in = new HashMap<String, String>();
-		in.put("flatType", "3");
-		in.put("town", "ANG MO KIO");
+		in.put("flatType", "0");
+		in.put("town", "ALL");
 
 		MathsAnalysis m = new MathsAnalysis(propertyData, in);
 		// PropertyData test = m.helperFilterOutRelevantData("Ang Mo Kio");
@@ -401,7 +430,7 @@ public class MathsAnalysis {
 		// System.out.println(q1.toString());
 
 		HashMap<String, HashMap<String, Double>> answers = m.answersToInsightQuestions();
-		// System.out.println(Math.round(answers.get("q2").get("ANG MO KIO")));
+		 // System.out.println(Math.round(answers.get("q1").get("3")));
 		// System.out.println(answers.get("q3").get("q3"));
 		// System.out.println(answers.get("q4").get("3"));
 		
