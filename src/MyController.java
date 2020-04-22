@@ -435,7 +435,7 @@ public class MyController {
 			}
 			
 			if (validPrice && validRate && validYears) {
-				String installment = LoanCalculator.getInstallment(price, rate, numOfYears);
+				String installment = LoanCalculator.getInstallment(price, numOfYears, rate);
 				statusLabel.setText(" ");			
 				monthlyInstallment.setText(installment);			
 			}
