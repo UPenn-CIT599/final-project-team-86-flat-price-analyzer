@@ -1,5 +1,23 @@
-import java.util.ArrayList;
+/**
+ * #Description#
+ * 
+ * Version 1.0
+ * 
+ * Added constructor; 
+ * Added methods helperCalculateAveragePrice, dataPointsForHistoricalPrices, 
+ * dataPointsForAvgPricesOverLocation
+ * 
+ * Version 2.0
+ * 
+ * Added methods: createXYSeries, getAggPrice
+ * 
+ * @author YiXin
+ * 
+ */
+
 import java.util.HashMap;
+
+import javafx.scene.chart.XYChart;
 
 
 
@@ -105,6 +123,98 @@ public class ChartData {
 		return avgPriceOverLocation;
 	}
 	
+	public static XYChart.Series<Number, Number> createXYSeries(PropertyData properties, Frequency freq, String seriesName, AggOp aggOp, double scaler) {
+		XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>(); 
+		
+		series.setName(seriesName);
+		
+		int minYear = properties.getMinYear();
+		int maxYear = properties.getMaxYear();
+		
+		switch (freq) {
+		case DAILY: {
+			// ADD here
+			break;
+		}
+		case MONTHLY: {
+			int minMonth = properties.getMinMonthInYear(minYear);
+			int maxMonth = properties.getMaxMonthInYear(maxYear);
+			int xVal = 0;
+			
+			for (int currentYear = minYear; currentYear <= maxYear; currentYear++) {
+				int firstMonth = 1;
+				int lastMonth = 12;
+				
+				// exceptions for first and last year of dataset, which may not include full 12 months
+				if (currentYear == minYear) {
+					firstMonth = minMonth;
+				}
+				else if (currentYear == maxYear) {
+					lastMonth = maxMonth;
+				}
+				
+				for (int currentMonth = firstMonth; currentMonth <= lastMonth; currentMonth++) {
+					PropertyData myProps = properties.filterByDate(currentYear, currentMonth);
+					double myPx = getAggPrice(myProps, aggOp, scaler);
+					series.getData().add(new XYChart.Data<Number, Number>(xVal, myPx));
+					xVal++;
+				}
+			}
+			
+			break;
+		}
+		case YEARLY: {
+			// ADD here
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + freq);
+		}
+		
+		return series;
+	}
+	
+	private static double getAggPrice(PropertyData properties, AggOp aggOp, double scaler) {
+		switch (aggOp) {
+		case MEAN: 
+		case SUM: {
+			double sum = 0;
+			
+			for (Property property : properties.propertyList) {
+				sum += property.getPrice();
+			}
+			
+			return (aggOp == AggOp.SUM ? sum : (sum / properties.propertyList.size())) / scaler; 
+		}
+		case MIN: {
+			double min = properties.getProperty(0).getPrice();
+			
+			for (Property property : properties.propertyList) {
+				double price = property.getPrice();
+				min = price < min ? price : min;
+			}
+			
+			return min / scaler;
+		}
+		case MAX: {
+			double max = properties.getProperty(0).getPrice();
+			
+			for (Property property : properties.propertyList) {
+				double price = property.getPrice();
+				max = price > max ? price : max;
+			}
+			
+			return max / scaler;
+		}
+		case MEDIAN: {
+			// to add
+			return 0;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + aggOp);
+		}
+				
+	}
 	
 	// for testing
 	public static void main(String[] args) {

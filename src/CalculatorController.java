@@ -5,12 +5,100 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
 public class CalculatorController {
+	
+	private PropertyData myProperties;
+	
+	@FXML
+    public void initialize() {
+		
+		myProperties = PropertyReader.readFile("resale_test.csv", true);
+		
+		// initialize elements in various tabs
+		
+		initializeTabIndices();
+		initializeTabInsights();
+		initializeTabCalculator();
+		initializeTabAbout();
+    }
+	
+	private void initializeTabIndices() {
+		
+		PropertyData threeRooms = myProperties.filterByFlatType("3");
+		PropertyData fourRooms = myProperties.filterByFlatType("4");
+		PropertyData fiveRooms = myProperties.filterByFlatType("5");
+		
+		XYChart.Series<Number, Number> seriesAll = ChartData.createXYSeries(myProperties, Frequency.MONTHLY, "All", AggOp.MEAN, 1000);
+		XYChart.Series<Number, Number> series3rm = ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000);
+		XYChart.Series<Number, Number> series4rm = ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000);
+		XYChart.Series<Number, Number> series5rm = ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000);
+		
+		chartAll.getData().addAll(seriesAll, series3rm, series4rm, series5rm);
+		
+		chartAll.getXAxis().setLabel("Date");
+		chartAll.getYAxis().setLabel("SGD '000");
+		chartAll.setCreateSymbols(false);
+		chartAll.getYAxis().setAutoRanging(true);
+		
+		
+		cbLocation.getItems().addAll(myProperties.getUniqueStreetNames());
+	}
+	
+	private void initializeTabInsights() {
+		// ADD here
+	}
+	
+	private void initializeTabCalculator() {
+		// ADD here
+	}
+	
+	private void initializeTabAbout() {
+		// ADD here
+	}
+	
+	// [TAB] Property Index --------------------------------------------------
+	
+	@FXML
+	private LineChart<Number, Number> chartAll;
+	
+	@FXML
+	private LineChart<Number, Number> chart3Rm;
+	
+	@FXML
+	private LineChart<Number, Number> chart4Rm;
+	
+	@FXML
+	private LineChart<Number, Number> chart5Rm;
+	
+	@FXML
+	private LineChart<Number, Number> chartExec;
+	
+	// [TAB] Location Insights --------------------------------------------------
+	
+	@FXML
+	private ComboBox<String> cbLocation;
+	
+	@FXML
+	private MenuButton mbFlatType;
+	
+	@FXML
+	private MenuButton mbRemainingLease;
+	
+	@FXML
+	private MenuButton mbMinPrice;
+	
+	@FXML
+	private MenuButton mbMaxPrice;
+	
+	// [TAB] Calculator --------------------------------------------------
 	
 	@FXML
 	private TextField flatPrice;
@@ -35,18 +123,15 @@ public class CalculatorController {
 	 */
 	
 	  public static boolean isInteger(String s) {
-	      boolean isValidInteger = false;
 	      try
 	      {
 	         Integer.parseInt(s);	 
-	         isValidInteger = true;
 	      }
 	      catch (NumberFormatException e)
 	      {
-	    	  //do nothing
+	    	  return false;
 	      }
-	 
-	      return isValidInteger;
+	      return true;
 	   }
 	  
 		
@@ -55,18 +140,15 @@ public class CalculatorController {
 	 */	  
 		
 	  public static boolean isFloat(String s) {
-	      boolean isValidFloat = false;
 	      try
 	      {
-	         Double.parseDouble(s);	 
-	         isValidFloat = true;
+	         Double.parseDouble(s);
 	      }
 	      catch (NumberFormatException e)
 	      {
-	    	  //do nothing
+	    	  return false;
 	      }
-	 
-	      return isValidFloat;
+	      return true;
 	   }
 	
 	
