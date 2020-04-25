@@ -1,4 +1,7 @@
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 
 public class CalculatorController {
 	
@@ -49,6 +53,17 @@ public class CalculatorController {
 			xAxisAll.setLowerBound(Math.round(myProperties.getMinDateInYears()));
 			xAxisAll.setUpperBound(Math.round(myProperties.getMaxDateInYears()));
 			xAxisAll.setTickUnit(1.0);
+			xAxisAll.setTickLabelFormatter(new StringConverter<Number>() {
+		        @Override
+		        public String toString(Number object) {
+		        	return xAxisFormatter().format(object);
+		        }
+
+		        @Override
+		        public Number fromString(String string) {
+		            return 0;
+		        }
+		    });
 		}
 		if (threeRooms.getSize() > 0) { 
 			chartAll.getData().add(ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000));
@@ -58,6 +73,17 @@ public class CalculatorController {
 			xAxis3Rm.setLowerBound(Math.round(threeRooms.getMinDateInYears()));
 			xAxis3Rm.setUpperBound(Math.round(threeRooms.getMaxDateInYears()));
 			xAxis3Rm.setTickUnit(1.0);
+			xAxis3Rm.setTickLabelFormatter(new StringConverter<Number>() {
+		        @Override
+		        public String toString(Number object) {
+		        	return xAxisFormatter().format(object);
+		        }
+
+		        @Override
+		        public Number fromString(String string) {
+		            return 0;
+		        }
+		    });
 		}
 		if (fourRooms.getSize() > 0) { 
 			chartAll.getData().add(ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000));
@@ -67,6 +93,17 @@ public class CalculatorController {
 			xAxis4Rm.setLowerBound(Math.round(fourRooms.getMinDateInYears()));
 			xAxis4Rm.setUpperBound(Math.round(fourRooms.getMaxDateInYears()));
 			xAxis4Rm.setTickUnit(1.0);
+			xAxis4Rm.setTickLabelFormatter(new StringConverter<Number>() {
+		        @Override
+		        public String toString(Number object) {
+		        	return xAxisFormatter().format(object);
+		        }
+
+		        @Override
+		        public Number fromString(String string) {
+		            return 0;
+		        }
+		    });
 		}
 		if (fiveRooms.getSize() > 0) { 
 			chartAll.getData().add(ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000));
@@ -76,6 +113,17 @@ public class CalculatorController {
 			xAxis5Rm.setLowerBound(Math.round(fiveRooms.getMinDateInYears()));
 			xAxis5Rm.setUpperBound(Math.round(fiveRooms.getMaxDateInYears()));
 			xAxis5Rm.setTickUnit(1.0);
+			xAxis5Rm.setTickLabelFormatter(new StringConverter<Number>() {
+		        @Override
+		        public String toString(Number object) {
+		        	return xAxisFormatter().format(object);
+		        }
+
+		        @Override
+		        public Number fromString(String string) {
+		            return 0;
+		        }
+		    });
 		}
 		
 		answersToAnalysisQnAllTab();
@@ -97,6 +145,32 @@ public class CalculatorController {
 		ObservableList<String> towns = myProperties.getUniqueTowns();
 		locationSelection.getItems().addAll(towns);
 		
+		xAxisLocation.setAutoRanging(false);
+		xAxisLocation.setLowerBound(Math.round(myProperties.getMinDateInYears()));
+		xAxisLocation.setUpperBound(Math.round(myProperties.getMaxDateInYears()));
+		xAxisLocation.setTickUnit(1.0);
+		xAxisLocation.setTickLabelFormatter(new StringConverter<Number>() {
+	        @Override
+	        public String toString(Number object) {
+	        	return xAxisFormatter().format(object);
+	        }
+
+	        @Override
+	        public Number fromString(String string) {
+	            return 0;
+	        }
+	    });
+		
+	}
+	
+	private DecimalFormat xAxisFormatter() {
+		Locale locale  = new Locale("en", "SG");
+    	String pattern = "###.##";
+
+    	DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(locale);
+    	decimalFormat.applyPattern(pattern);
+    	
+    	return decimalFormat;
 	}
 	
 	private void initializeTabCalculator() {
