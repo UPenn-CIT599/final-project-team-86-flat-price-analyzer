@@ -1,5 +1,4 @@
 /**
- * @author Jiamin Lua 
  * Property class that contains all the attributes of the property.
  * This class also includes getter and setter methods, and the constructor that 
  * creates a new property listing

@@ -13,9 +13,6 @@
  * 
  * Added helper functions: filterByFlatType, getLastYear, getLastMonthOfYear, ...
  * 
- * @author Jiamin Lua
- * @version 1.0
- * 
  */
 
 import java.util.ArrayList;

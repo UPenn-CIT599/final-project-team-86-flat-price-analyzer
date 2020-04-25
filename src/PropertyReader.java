@@ -1,5 +1,4 @@
 /**
- * @author Jiamin Lua 
  * PropertyReader reads from the input data file to create
  * property objects.
  */
