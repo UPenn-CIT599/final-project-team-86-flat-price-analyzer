@@ -221,7 +221,7 @@ public class ChartData {
 	
 	// for testing
 	public static void main(String[] args) {
-		PropertyData propertyData = PropertyReader.readFile("resale-prices.csv", true);
+		PropertyData propertyData = PropertyReader.readFileLocal("resale-prices.csv", true);
 		HashMap<String, String> in = new HashMap<String, String>();
 		in.put("flatType", "0");
 		in.put("town", "ALL");
