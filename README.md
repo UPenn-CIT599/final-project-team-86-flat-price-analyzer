@@ -31,10 +31,10 @@ Lastly, we also have a mortgage calculator so users can find out the estimated m
 1) Go to Releases
 2) Download MyProperty.jar into your main user folder
 3) Open Command Line
-4) Go into the directory where the jar file was saved to
+4) CD into the directory where the jar file was saved to, for example:
 
 ```sh
-cd <Folder containing jar file download>
+cd C:\Users\someUser\Desktop
 ```
 
 5) Run the jar file
