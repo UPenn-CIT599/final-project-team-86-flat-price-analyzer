@@ -22,7 +22,7 @@ public class CalculatorController {
 	@FXML
     public void initialize() {
 		
-		myProperties = PropertyReader.readFile("jan2019_dec2019.csv", true);
+		myProperties = PropertyReader.readFile("resale-prices-2010.csv", true);
 		
 		// initialize elements in various tabs
 		

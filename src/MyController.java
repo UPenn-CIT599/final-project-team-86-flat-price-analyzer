@@ -77,7 +77,7 @@ public class MyController {
 	@FXML
 	private Label q1All;
 	
-	PropertyData inputPropertyData = PropertyReader.readFile("resale_test.csv", true);
+	PropertyData inputPropertyData = PropertyReader.readFile("jan1990_dec2019.csv", true);
 	
 	
 	
@@ -88,7 +88,7 @@ public class MyController {
 	@FXML
     public void initialize() {
 		System.out.println("second");
-		PropertyData myProperties = PropertyReader.readFile("jan2019_dec2019.csv", true);
+		PropertyData myProperties = PropertyReader.readFile("jan1990_dec2019.csv", true);
 		PropertyData threeRooms = this.filterByFlatType(myProperties, "3");
 		PropertyData fourRooms = this.filterByFlatType(myProperties, "4");
 		PropertyData fiveRooms = this.filterByFlatType(myProperties, "5");
