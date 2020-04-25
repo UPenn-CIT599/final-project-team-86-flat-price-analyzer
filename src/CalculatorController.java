@@ -6,11 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 public class CalculatorController {
@@ -20,7 +22,7 @@ public class CalculatorController {
 	@FXML
     public void initialize() {
 		
-		myProperties = PropertyReader.readFile("resale_test.csv", true);
+		myProperties = PropertyReader.readFile("jan2019_dec2019.csv", true);
 		
 		// initialize elements in various tabs
 		
@@ -35,25 +37,51 @@ public class CalculatorController {
 		PropertyData threeRooms = myProperties.filterByFlatType("3");
 		PropertyData fourRooms = myProperties.filterByFlatType("4");
 		PropertyData fiveRooms = myProperties.filterByFlatType("5");
+		PropertyData execRooms = myProperties.filterByFlatType("EXECUTIVE");
 		
 		XYChart.Series<Number, Number> seriesAll = ChartData.createXYSeries(myProperties, Frequency.MONTHLY, "All", AggOp.MEAN, 1000);
 		XYChart.Series<Number, Number> series3rm = ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000);
 		XYChart.Series<Number, Number> series4rm = ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000);
 		XYChart.Series<Number, Number> series5rm = ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000);
 		
-		chartAll.getData().addAll(seriesAll, series3rm, series4rm, series5rm);
+		if (myProperties.getSize() > 0) { chartAll.getData().add(seriesAll); }
+		if (threeRooms.getSize() > 0) { 
+			chartAll.getData().add(ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000));
+			chart3Rm.getData().add(ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000));
+		}
+		if (fourRooms.getSize() > 0) { 
+			chartAll.getData().add(ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000));
+			chart4Rm.getData().add(ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000));
+		}
+		if (fiveRooms.getSize() > 0) { 
+			chartAll.getData().add(ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000));
+			chart5Rm.getData().add(ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000));
+		}
+		if (execRooms.getSize() > 0) { 
+			chartAll.getData().add(ChartData.createXYSeries(execRooms, Frequency.MONTHLY, "Executive", AggOp.MEAN, 1000));
+			chartExec.getData().add(ChartData.createXYSeries(execRooms, Frequency.MONTHLY, "Executive", AggOp.MEAN, 1000));
+		}
 		
-		chartAll.getXAxis().setLabel("Date");
-		chartAll.getYAxis().setLabel("SGD '000");
-		chartAll.setCreateSymbols(false);
-		chartAll.getYAxis().setAutoRanging(true);
+		answersToAnalysisQnAllTab();
+		answersToAnalysisQn3RoomTab();
+		answersToAnalysisQn4RoomTab();
+		answersToAnalysisQn5RoomTab();
+		answersToAnalysisQnExecutiveRoomTab();
 		
+		//chartAll.getXAxis().setLabel("Date");
+		//chartAll.getYAxis().setLabel("SGD '000");
+		//chartAll.setCreateSymbols(false);
 		
-		cbLocation.getItems().addAll(myProperties.getUniqueStreetNames());
+		//yAxisAll.setAutoRanging(true);
+		//yAxisAll.setForceZeroInRange(false);		
 	}
 	
 	private void initializeTabInsights() {
-		// ADD here
+		// initialize filter options
+		
+		ObservableList<String> towns = myProperties.getUniqueTowns();
+		locationSelection.getItems().addAll(towns);
+		
 	}
 	
 	private void initializeTabCalculator() {
@@ -81,10 +109,13 @@ public class CalculatorController {
 	@FXML
 	private LineChart<Number, Number> chartExec;
 	
+	@FXML
+	private NumberAxis yAxisAll;
+	
 	// [TAB] Location Insights --------------------------------------------------
 	
-	@FXML
-	private ComboBox<String> cbLocation;
+	//@FXML
+	//private ComboBox<String> cbLocation;
 	
 	@FXML
 	private MenuButton mbFlatType;
@@ -98,6 +129,19 @@ public class CalculatorController {
 	@FXML
 	private MenuButton mbMaxPrice;
 	
+	@FXML
+	private LineChart<Number, Number> chartLocation;
+	
+	public void refreshChartOnSelection() {
+		String town = locationSelection.getValue();
+		PropertyData propertiesInSelectedTown = myProperties.filterByTown(town);
+		if (propertiesInSelectedTown.getSize() > 0) { 
+			chartLocation.getData().clear();;
+			chartLocation.getData().add(ChartData.createXYSeries(propertiesInSelectedTown, Frequency.MONTHLY, town, AggOp.MEAN, 1000)); 
+		}
+		answersToAnalysisQnLocation();
+	}
+		
 	// [TAB] Calculator --------------------------------------------------
 	
 	@FXML
@@ -274,7 +318,7 @@ public class CalculatorController {
 		private Label q3Location;
 		
 		// Global Variables used for the methods below
-		PropertyData inputPropertyData = PropertyReader.readFile("resale-prices.csv", true);
+		// PropertyData inputPropertyData = PropertyReader.readFile("resale-prices.csv", true);
 		ObservableList<String> townList = FXCollections.observableArrayList("ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK", "BUKIT MERAH", "BUKIT PANJANG",
 				"BUKIT TIMAH", "CENTRAL AREA", "CHOA CHU KANG", "CLEMENTI", "GEYLANG", "HOUGANG", "JURONG EAST",
 				"JURONG WEST", "KALLANG/WHAMPOA", "MARINE PARADE", "PASIR RIS", "PUNGGOL", "QUEENSTOWN", "SEMBAWANG",
@@ -289,7 +333,7 @@ public class CalculatorController {
 		  inForTab.put("flatType", "0");
 		  inForTab.put("town", "ALL");
 		  
-		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  MathsAnalysis m1 = new MathsAnalysis(myProperties, inForTab);
 		 
 		  q1All.setText("Average Price for All Properties (SGD): " + Math.round(m1.answersToInsightQuestions().get("q1").get("ALL")));
 		  q3All.setText("Median Price for All Properties (SGD): " + Math.round(m1.answersToInsightQuestions().get("q3").get("q3")));
@@ -367,7 +411,7 @@ public class CalculatorController {
 		  inForTab.put("flatType", "3");
 		  inForTab.put("town", "ALL");
 		  
-		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  MathsAnalysis m1 = new MathsAnalysis(myProperties, inForTab);
 		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "3", "ALL");		 
 		  
 		  
@@ -384,7 +428,7 @@ public class CalculatorController {
 		  inForTab.put("flatType", "4");
 		  inForTab.put("town", "ALL");
 		  
-		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  MathsAnalysis m1 = new MathsAnalysis(myProperties, inForTab);
 		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "4", "ALL");	
 		  
 		  
@@ -401,7 +445,7 @@ public class CalculatorController {
 		  inForTab.put("flatType", "5");
 		  inForTab.put("town", "ALL");
 		  
-		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  MathsAnalysis m1 = new MathsAnalysis(myProperties, inForTab);
 		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "5", "ALL");	
 		  
 		  
@@ -418,7 +462,7 @@ public class CalculatorController {
 		  inForTab.put("flatType", "6");
 		  inForTab.put("town", "ALL");
 		  
-		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  MathsAnalysis m1 = new MathsAnalysis(myProperties, inForTab);
 		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "6", "ALL");	
 		  
 		  
@@ -430,10 +474,9 @@ public class CalculatorController {
 	 /**
 	  * This method is to get the initialise locationSelection
 	  */
-	 public void helperStartCombo() {
-		 locationSelection.setItems(townList);
-	
-	 }
+	 //public void helperStartCombo() {
+	//	 locationSelection.setItems(townList);
+	 //}
 	 
 	 /**
 	  * This method is to get the user's selection of the location information 
@@ -451,9 +494,10 @@ public class CalculatorController {
 	  
 		  HashMap<String, String> inForTab = new HashMap<String, String>();
 		  inForTab.put("flatType", "0"); // for all flat types
-		  inForTab.put("town", this.helperComboChanged());
+		  //inForTab.put("town", this.helperComboChanged());
+		  inForTab.put("town", locationSelection.getValue());
 		  
-		  MathsAnalysis m1 = new MathsAnalysis(this.inputPropertyData, inForTab);
+		  MathsAnalysis m1 = new MathsAnalysis(myProperties, inForTab);
 		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "0", inForTab.get("town"));	
 		  
 		  q2Location.setText("Average Price for All Properties in the selected town (SGD): " + outcomes.get("ans2"));	  

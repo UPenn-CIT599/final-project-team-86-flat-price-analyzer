@@ -38,6 +38,18 @@ public class PropertyData {
         return propertyList.size();
     }
     
+    public PropertyData filterByTown(String town) {
+		PropertyData filteredProperties = new PropertyData();
+		
+		for (Property property : propertyList) {
+			if (property.getTown().equals(town)) {
+				filteredProperties.addProperty(property);
+			}
+		}
+		
+		return filteredProperties;
+	}
+    
     public PropertyData filterByFlatType(String flatType) {
 		PropertyData filteredProperties = new PropertyData();
 		
@@ -110,7 +122,7 @@ public class PropertyData {
 		return maxMonth;
 	}
     
-	public ObservableList<String> getUniqueStreetNames() {
+	public ObservableList<String> getUniqueTowns() {
 		ObservableList<String> streetNames = FXCollections.observableArrayList();
 		
 		for (Property property : propertyList) {

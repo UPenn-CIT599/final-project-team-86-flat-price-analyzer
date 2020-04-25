@@ -126,49 +126,52 @@ public class ChartData {
 	public static XYChart.Series<Number, Number> createXYSeries(PropertyData properties, Frequency freq, String seriesName, AggOp aggOp, double scaler) {
 		XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>(); 
 		
-		series.setName(seriesName);
-		
-		int minYear = properties.getMinYear();
-		int maxYear = properties.getMaxYear();
-		
-		switch (freq) {
-		case DAILY: {
-			// ADD here
-			break;
-		}
-		case MONTHLY: {
-			int minMonth = properties.getMinMonthInYear(minYear);
-			int maxMonth = properties.getMaxMonthInYear(maxYear);
-			int xVal = 0;
+		// if no properties, return empty series
+		if (properties.getSize() > 0) {
+			series.setName(seriesName);
 			
-			for (int currentYear = minYear; currentYear <= maxYear; currentYear++) {
-				int firstMonth = 1;
-				int lastMonth = 12;
-				
-				// exceptions for first and last year of dataset, which may not include full 12 months
-				if (currentYear == minYear) {
-					firstMonth = minMonth;
-				}
-				else if (currentYear == maxYear) {
-					lastMonth = maxMonth;
-				}
-				
-				for (int currentMonth = firstMonth; currentMonth <= lastMonth; currentMonth++) {
-					PropertyData myProps = properties.filterByDate(currentYear, currentMonth);
-					double myPx = getAggPrice(myProps, aggOp, scaler);
-					series.getData().add(new XYChart.Data<Number, Number>(xVal, myPx));
-					xVal++;
-				}
+			int minYear = properties.getMinYear();
+			int maxYear = properties.getMaxYear();
+			
+			switch (freq) {
+			case DAILY: {
+				// ADD here
+				break;
 			}
-			
-			break;
-		}
-		case YEARLY: {
-			// ADD here
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + freq);
+			case MONTHLY: {
+				int minMonth = properties.getMinMonthInYear(minYear);
+				int maxMonth = properties.getMaxMonthInYear(maxYear);
+				int xVal = 0;
+				
+				for (int currentYear = minYear; currentYear <= maxYear; currentYear++) {
+					int firstMonth = 1;
+					int lastMonth = 12;
+					
+					// exceptions for first and last year of dataset, which may not include full 12 months
+					if (currentYear == minYear) {
+						firstMonth = minMonth;
+					}
+					else if (currentYear == maxYear) {
+						lastMonth = maxMonth;
+					}
+					
+					for (int currentMonth = firstMonth; currentMonth <= lastMonth; currentMonth++) {
+						PropertyData myProps = properties.filterByDate(currentYear, currentMonth);
+						Double myPx = getAggPrice(myProps, aggOp, scaler);
+						if (!myPx.isNaN()) { series.getData().add(new XYChart.Data<Number, Number>(xVal, myPx)); }
+						xVal++;
+					}
+				}
+				
+				break;
+			}
+			case YEARLY: {
+				// ADD here
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + freq);
+			}
 		}
 		
 		return series;

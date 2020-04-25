@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
@@ -19,7 +25,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CalculatorController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CalculatorController">
   <tabs>
     <Tab text="Home">
       <content>
@@ -40,7 +46,7 @@
                <children>
                   <TabPane layoutX="174.0" layoutY="123.0" prefHeight="371.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                      <Tab onSelectionChanged="#answersToAnalysisQnAllTab" text="All">
+                      <Tab text="All">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -48,12 +54,12 @@
                                        <items>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="395.0">
                                              <children>
-                                                <LineChart prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <LineChart fx:id="chartAll" createSymbols="false" prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <xAxis>
-                                                      <CategoryAxis side="BOTTOM" />
+                                                      <NumberAxis label="Date" side="BOTTOM" />
                                                    </xAxis>
                                                    <yAxis>
-                                                      <NumberAxis side="LEFT" />
+                                                      <NumberAxis fx:id="yAxisAll" forceZeroInRange="false" label="SGD '000" side="LEFT" />
                                                    </yAxis>
                                                 </LineChart>
                                              </children>
@@ -76,7 +82,7 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                      <Tab onSelectionChanged="#answersToAnalysisQn3RoomTab" text="3-Room">
+                      <Tab text="3-Room">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -84,12 +90,12 @@
                                        <items>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="395.0">
                                              <children>
-                                                <LineChart prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <LineChart fx:id="chart3Rm" createSymbols="false" prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <xAxis>
-                                                      <CategoryAxis side="BOTTOM" />
+                                                      <NumberAxis label="Date" side="BOTTOM" />
                                                    </xAxis>
                                                    <yAxis>
-                                                      <NumberAxis side="LEFT" />
+                                                      <NumberAxis fx:id="yAxis3Rm" forceZeroInRange="false" label="SGD '000" side="LEFT" />
                                                    </yAxis>
                                                 </LineChart>
                                              </children>
@@ -106,7 +112,7 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                        <Tab onSelectionChanged="#answersToAnalysisQn4RoomTab" text="4-Room">
+                        <Tab text="4-Room">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -114,12 +120,12 @@
                                        <items>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="395.0">
                                              <children>
-                                                <LineChart prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <LineChart fx:id="chart4Rm" createSymbols="false" prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <xAxis>
-                                                      <CategoryAxis side="BOTTOM" />
+                                                      <NumberAxis label="Date" side="BOTTOM" />
                                                    </xAxis>
                                                    <yAxis>
-                                                      <NumberAxis side="LEFT" />
+                                                      <NumberAxis fx:id="yAxis4Rm" forceZeroInRange="false" label="SGD '000" side="LEFT" />
                                                    </yAxis>
                                                 </LineChart>
                                              </children>
@@ -137,7 +143,7 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab onSelectionChanged="#answersToAnalysisQn5RoomTab" text="5-Room">
+                        <Tab text="5-Room">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -145,12 +151,12 @@
                                        <items>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="395.0">
                                              <children>
-                                                <LineChart prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <LineChart fx:id="chart5Rm" createSymbols="false" prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <xAxis>
-                                                      <CategoryAxis side="BOTTOM" />
+                                                      <NumberAxis label="Date" side="BOTTOM" />
                                                    </xAxis>
                                                    <yAxis>
-                                                      <NumberAxis side="LEFT" />
+                                                      <NumberAxis fx:id="yAxis5rm" forceZeroInRange="false" label="SGD '000" side="LEFT" />
                                                    </yAxis>
                                                 </LineChart>
                                              </children>
@@ -168,7 +174,7 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab onSelectionChanged="#answersToAnalysisQnExecutiveRoomTab" text="Executive-Room">
+                        <Tab text="Executive-Room">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -176,12 +182,12 @@
                                        <items>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="395.0">
                                              <children>
-                                                <LineChart prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <LineChart fx:id="chartExec" createSymbols="false" prefHeight="340.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <xAxis>
-                                                      <CategoryAxis side="BOTTOM" />
+                                                      <NumberAxis label="Date" side="BOTTOM" />
                                                    </xAxis>
                                                    <yAxis>
-                                                      <NumberAxis side="LEFT" />
+                                                      <NumberAxis fx:id="yAxisExec" forceZeroInRange="false" label="SGD '000" side="LEFT" />
                                                    </yAxis>
                                                 </LineChart>
                                              </children>
@@ -205,7 +211,7 @@
             </AnchorPane>
         </content>
       </Tab>
-    <Tab onSelectionChanged="#helperStartCombo" text="Location Insights">
+    <Tab text="Location Insights">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -227,42 +233,18 @@
                                 </rowConstraints>
                                  <children>
                                     <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Filter 1" GridPane.columnIndex="1">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                      </items>
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
                                     </MenuButton>
-                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Filter 2" GridPane.columnIndex="2">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                      </items>
-                                    </MenuButton>
-                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Filter 3" GridPane.columnIndex="3">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                      </items>
-                                    </MenuButton>
-                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Filter 4" GridPane.columnIndex="4">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                      </items>
-                                    </MenuButton>
-                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Filter 5" GridPane.columnIndex="5">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                      </items>
-                                    </MenuButton>
+                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Filter 2" GridPane.columnIndex="2" />
+                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Filter 3" GridPane.columnIndex="3" />
+                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Filter 4" GridPane.columnIndex="4" />
+                                    <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Filter 5" GridPane.columnIndex="5" />
                                     <Label alignment="CENTER" prefHeight="17.0" prefWidth="114.0" text="Filters:" />
                                  </children>
                               </GridPane>
-                              <ComboBox fx:id="locationSelection" layoutX="99.0" layoutY="2.0" onAction="#answersToAnalysisQnLocation" prefHeight="25.0" prefWidth="501.0" />
+                              <ComboBox fx:id="locationSelection" layoutX="99.0" layoutY="2.0" onAction="#refreshChartOnSelection" prefHeight="25.0" prefWidth="501.0" />
                               <Label alignment="CENTER" layoutY="6.0" prefHeight="17.0" prefWidth="99.0" text="Location:" />
                            </children>
                         </AnchorPane>
@@ -272,12 +254,12 @@
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <LineChart layoutX="-43.0" layoutY="-58.0" prefHeight="301.0" prefWidth="414.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <LineChart fx:id="chartLocation" createSymbols="false" layoutX="-43.0" layoutY="-58.0" prefHeight="301.0" prefWidth="414.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
-                                              <CategoryAxis side="BOTTOM" />
+                                              <NumberAxis label="Date" side="BOTTOM" />
                                             </xAxis>
                                             <yAxis>
-                                              <NumberAxis side="LEFT" />
+                                              <NumberAxis label="SGD '000" forceZeroInRange="false" side="LEFT" />
                                             </yAxis>
                                           </LineChart>
                                        </children>
