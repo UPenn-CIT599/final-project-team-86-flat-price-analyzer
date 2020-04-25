@@ -18,7 +18,7 @@ public class Property {
     private double price;
 
     /**
-     * Getters and setters for Flight class
+     * Getters and setters for Property class
      */
 
 
@@ -133,10 +133,5 @@ public class Property {
         return currFlat;
     }
 
-//    public static void main(String[] args) {
-//		PropertyData pd = PropertyReader.readFile("resale-prices.csv", true);
-//		Property p = pd.getProperty(721695);
-//		System.out.println(p.toString());
-//	}
     
 }
