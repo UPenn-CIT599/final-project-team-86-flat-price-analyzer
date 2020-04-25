@@ -8,11 +8,12 @@ We have 3 main sections:
 - Mortgage Calculator: this allows users to find out their estimated monthly installments
 
 Actual work breakdown:
-- ChartData.java - Yixin Miao
+- ChartData.java - Yixin Miao, Jia Xun Paw 
 - LoanCalculator.java - Jiamin Lua
 - LoanCalculatorTest.java - Jiamin Lua
-- MathAnalysisQuestions.java - Yixin Miao
+- MathAnalysisQuestions.txt - Yixin Miao
 - MathsAnalysis.java - Yixin Miao
+- MathsAnalysisTest.java - Yixin Miao
 - Property.java - Jiamin Lua
 - PropertyData.java - Jiamin Lua, Jia Xun Paw
 - PropertyDataTest.java - Jiamin Lua
