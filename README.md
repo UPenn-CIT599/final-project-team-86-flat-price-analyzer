@@ -83,7 +83,7 @@ java -jar MyProperty.jar
   - Collaborators
     
 
-**CalculatorController**:
+**WidgetController**:
   - Responsibilities
     - Main controller for the GUI/widget class
     - Coordinates and listens for ActionEvents in the widget
@@ -99,7 +99,7 @@ java -jar MyProperty.jar
   - Responsibilities
     - Displays the entire property price analyzer into a user-friendly GUI
   - Collaborators
-    - CalculatorController
+    - WidgetController
 
 ## Suggested workflow:
  
