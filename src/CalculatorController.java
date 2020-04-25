@@ -22,7 +22,7 @@ public class CalculatorController {
 	@FXML
     public void initialize() {
 		
-		myProperties = PropertyReader.readFile("resale-prices-2010.csv", true);
+		myProperties = PropertyReader.readFile("resale-prices-2005.csv", true);
 		
 		// initialize elements in various tabs
 		
@@ -37,7 +37,6 @@ public class CalculatorController {
 		PropertyData threeRooms = myProperties.filterByFlatType("3");
 		PropertyData fourRooms = myProperties.filterByFlatType("4");
 		PropertyData fiveRooms = myProperties.filterByFlatType("5");
-		PropertyData execRooms = myProperties.filterByFlatType("EXECUTIVE");
 		
 		XYChart.Series<Number, Number> seriesAll = ChartData.createXYSeries(myProperties, Frequency.MONTHLY, "All", AggOp.MEAN, 1000);
 		XYChart.Series<Number, Number> series3rm = ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000);
@@ -57,16 +56,11 @@ public class CalculatorController {
 			chartAll.getData().add(ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000));
 			chart5Rm.getData().add(ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000));
 		}
-		if (execRooms.getSize() > 0) { 
-			chartAll.getData().add(ChartData.createXYSeries(execRooms, Frequency.MONTHLY, "Executive", AggOp.MEAN, 1000));
-			chartExec.getData().add(ChartData.createXYSeries(execRooms, Frequency.MONTHLY, "Executive", AggOp.MEAN, 1000));
-		}
 		
 		answersToAnalysisQnAllTab();
 		answersToAnalysisQn3RoomTab();
 		answersToAnalysisQn4RoomTab();
 		answersToAnalysisQn5RoomTab();
-		answersToAnalysisQnExecutiveRoomTab();
 		
 		//chartAll.getXAxis().setLabel("Date");
 		//chartAll.getYAxis().setLabel("SGD '000");
@@ -105,9 +99,6 @@ public class CalculatorController {
 	
 	@FXML
 	private LineChart<Number, Number> chart5Rm;
-	
-	@FXML
-	private LineChart<Number, Number> chartExec;
 	
 	@FXML
 	private NumberAxis yAxisAll;
@@ -454,22 +445,6 @@ public class CalculatorController {
 		  q4Room5.setText("Depreciation for 5-room property is the highest when the property has " + outcomes.get("ans4") + " years of remaining lease.");
 	  }
 	 
-	 /**
-	  * This method is to provide text content for the "Executive Room" tab under "Property Index"
-	  */
-	 public void answersToAnalysisQnExecutiveRoomTab() {
-		  HashMap<String, String> inForTab = new HashMap<String, String>();
-		  inForTab.put("flatType", "6");
-		  inForTab.put("town", "ALL");
-		  
-		  MathsAnalysis m1 = new MathsAnalysis(myProperties, inForTab);
-		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "6", "ALL");	
-		  
-		  
-		  q1RoomExe.setText("Average Price for Executive-Room Properties (SGD): " + outcomes.get("ans1"));	  
-		  q3RoomExe.setText("Median Price for Executive-Room Properties (SGD): " + outcomes.get("ans3"));
-		  q4RoomExe.setText("Depreciation for Executive-room property is the highest when the property has " + outcomes.get("ans4") + " years of remaining lease.");
-	  }
 	 
 	 /**
 	  * This method is to get the initialise locationSelection
