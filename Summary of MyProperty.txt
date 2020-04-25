@@ -1,0 +1,26 @@
+Summary of MyProperty:
+
+The aim of MyProperty is to analyse how property prices have changed in Singapore over the past 15 years so users looking to purchase a flat in Singapore can be better informed when making their decision.
+
+We have 3 main sections: 
+- Property Index: the tab shows how housing prices (by flat type) have changed in the past 15 years
+- Location Insight: the tab shows how property prices in different locations in Singapore have changed 
+- Mortgage Calculator: this allows users to find out their estimated monthly installments
+
+Actual work breakdown:
+- ChartData.java - Yixin Miao
+- LoanCalculator.java - Jiamin Lua
+- LoanCalculatorTest.java - Jiamin Lua
+- MathAnalysisQuestions.java - Yixin Miao
+- MathsAnalysis.java - Yixin Miao
+- Property.java - Jiamin Lua
+- PropertyData.java - Jiamin Lua, Jia Xun Paw
+- PropertyDataTest.java - Jiamin Lua
+- PropertyReader.java - Jiamin Lua, Jia Xun Paw
+- PropertyReaderTest.java - Jiamin Lua, Jia Xun Paw
+- PropertyTest.java - Jiamin Lua
+- Sample.fxml - Jia Xun Paw, Jiamin Lua, Yixin Miao
+- Widget.java - Jia Xun Paw
+- WidgetController.java - Jia Xun Paw, Jiamin Lua, Yixin Miao
+
+Link to GitHub: https://github.com/UPenn-CIT599/final-project-team-86-flat-price-analyzer
