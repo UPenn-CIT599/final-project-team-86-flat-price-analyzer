@@ -57,7 +57,6 @@ We hope that the tool will answer questions that users will have about a propert
     - Compute answers after receiving queries from user input in widget
   - Collaborator
     - PropertyData
-    - Chart
     
 **ChartData**:
   - Responsibilities 
@@ -70,8 +69,16 @@ We hope that the tool will answer questions that users will have about a propert
   - Responsibilities
     - Displays the entire property price analyzer into a user-friendly GUI
   - Collaborators
-    - Chart
+    - CalculatorController
+    
+ **CalculatorController**:
+  - Responsibilities
+    - Control and construct the elements to be displayed in the GUI
+  - Collaborators
+    - ChartData
     - MathAnalysis
+    - LoanCalculator
+    - PropertyData
     - PropertyReader
 
 ## Suggested workflow:
