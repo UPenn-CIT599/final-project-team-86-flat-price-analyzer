@@ -6,10 +6,10 @@ import javafx.collections.ObservableList;
 
 public class MathsAnalysis {
 
-	PropertyData pd; // arraylist<Property>
+	PropertyData pd; 
 	HashMap<String, String> userInputs; // key-value pairs of user input info
-										// <flatType> - 1,2,3,4,5,6,7, 0 (String)
-										// <town> - CAPITAL LETTER OF TOWN NAME or ALL(String)
+										// flatType - 1,2,3,4,5, 0 (String)
+										// town - CAPITAL LETTER OF TOWN NAME or ALL(String)
 	ObservableList<String> townList;
 	
 
@@ -21,7 +21,7 @@ public class MathsAnalysis {
 	}
 
 	/**
-	 * This is a helper method for calculating the average of a given propertydata
+	 * This is a helper method for calculating the average of a given PropertyData
 	 * 
 	 * @param prices
 	 * @return averagePrice
@@ -101,9 +101,9 @@ public class MathsAnalysis {
 
 	/**
 	 * This is a helper method for filter out a subset of data from the full
-	 * PropertyData based on flat Type. Overloading
+	 * PropertyData based on flat Type. 
 	 * 
-	 * @param flatType (1,2,3,4,5,Executive = 6, multi-gen = 7, ALL = 0)
+	 * @param flatType (1,2,3,4,5, ALL = 0)
 	 * @return subsetPd
 	 */
 	private PropertyData helperFilterOutRelevantData(Integer intFlatType) {
@@ -113,19 +113,7 @@ public class MathsAnalysis {
 		
 		// convert intFlatType into String
 		String flatSize = "";
-		/*
-		if (intFlatType == (6)) {
-			flatSize = "EXECUTIVE";
-		}
-
-		else if (intFlatType == (7)) {
-			flatSize = "MULTI-GENERATION";
-		}
-
-		else {
-			flatSize = intFlatType.toString();
-		}
-		*/
+		
 		flatSize = intFlatType.toString();
 		
 		// get the subset 
@@ -141,30 +129,7 @@ public class MathsAnalysis {
 
 	}
 
-	/**
-	 * This is a helper method for filter out a subset of data from the full
-	 * PropertyData based on town. Overloading
-	 * 
-	 * @param town
-	 * @return subsetPd
-	 */
-	private PropertyData helperFilterOutRelevantData(String town) {
-
-		HashMap<String, PropertyData> diffFlatLocationGroupPd = this.helperArrangeIntoDifferentFlatLocationGroup();
-		PropertyData subsetPd = new PropertyData();
-		
-		if (!town.contentEquals("ALL")) {
-			subsetPd = diffFlatLocationGroupPd.get(town.toUpperCase());
-		}
-		
-		else {
-			subsetPd = this.pd;
-		}
-		
-
-		return subsetPd;
-	}
-
+	
 	/**
 	 * This is to calculate the national average property price of all the flats in
 	 * Singapore. Output the average prices for different flat room types
@@ -175,26 +140,14 @@ public class MathsAnalysis {
 		// Arrange this.pd into different room type groups
 		HashMap<String, PropertyData> diffFlatSizeGroupPd = this.helperArrangeIntoDifferentFlatSizeGroup();
 
-		// Output into a Hashmap, with key = flatType, value = averagePrice
+		// Output into a HashMap, with key = flatType, value = averagePrice
 		HashMap<String, Double> nationalAvg = new HashMap<String, Double>();
 
 		// Calculate the average of each group
 		String type = "";
 		
 		for (int i = 1; i < 8; i++) {
-			/*
-			if (i == 6) {
-				type = "EXECUTIVE";
-			}
-
-			else if (i == 7) {
-				type = "MULTI-GENERATION";
-			}
-
-			else {
-				type = Integer.toString(i);
-			}
-			*/
+			
 			type = Integer.toString(i);
 			if (diffFlatSizeGroupPd.get(type) != null) {
 				double avgPrice = this.helperCalculateAveragePrice(diffFlatSizeGroupPd.get(type));
@@ -218,13 +171,10 @@ public class MathsAnalysis {
 		// Arrange this.pd into different towns
 		HashMap<String, PropertyData> diffFlatLocationGroupPd = this.helperArrangeIntoDifferentFlatLocationGroup();
 
-		// Output into a Hashmap, with key = townName, value = averagePrice
+		// Output into a HashMap, with key = townName, value = averagePrice
 		HashMap<String, Double> townAvg = new HashMap<String, Double>();
 
 		// Calculate the average of each town
-
-		
-
 		for (int i = 0; i < this.townList.size(); i++) {
 			String town = this.townList.get(i);
 			if (diffFlatLocationGroupPd.get(town) != null) {
@@ -257,7 +207,7 @@ public class MathsAnalysis {
 				
 			}
 			
-			// Calculate the median of the resulted price arraylist
+			// Calculate the median of the resulted price arrayList
 			Collections.sort(priceArray);
 			int length = priceArray.size();
 			
@@ -271,9 +221,7 @@ public class MathsAnalysis {
 					median = (double) priceArray.get(length / 2);
 				}
 			}
-			
 		}
-		
 		
 		return median;
 	}
@@ -294,13 +242,7 @@ public class MathsAnalysis {
 		String type = "";
 		
 		for (int i = 1; i < 8; i++) {
-			/*
-			if (i == 6) {type = "EXECUTIVE";}
-
-			else if (i == 7) {type = "MULTI-GENERATION";}
-
-			else {type = Integer.toString(i);}
-			*/
+			
 			type = Integer.toString(i);
 			// roomPd: contains data for one specific flatType
 			PropertyData roomPd = diffFlatSizeGroupPd.get(type);
@@ -355,9 +297,6 @@ public class MathsAnalysis {
 			remainingLease.put(type, lowestLeaseYear);
 			
 		}
-		
-		//remainingLease.put("6", remainingLease.get("EXECUTIVE"));
-
 		return remainingLease;
 	}
 
@@ -425,31 +364,4 @@ public class MathsAnalysis {
 		return answers;
 	}
 
-	/*
-	// This is for testing MathsAnalysis class
-	public static void main(String[] args) {
-		
-		// PropertyData propertyData = PropertyReader.readFile("resale-prices.csv", true);
-		PropertyData propertyData = PropertyReader.readFile("resale-prices-2010.csv", true);
-		// System.out.println(propertyData.getProperty(1).toString());
-		// System.out.println(propertyData.getSize());
-		HashMap<String, String> in = new HashMap<String, String>();
-		in.put("flatType", "0");
-		in.put("town", "YISHUN");
-
-		MathsAnalysis m = new MathsAnalysis(propertyData, in);
-		// PropertyData test = m.helperFilterOutRelevantData("Ang Mo Kio");
-		// System.out.println(test.getSize());
-		// HashMap<String, Double> q1 = m.q1calculateNationalAverage();
-		// System.out.println(q1.toString());
-
-		HashMap<String, HashMap<String, Double>> answers = m.answersToInsightQuestions();
-		System.out.println(answers.get("q1"));
-		System.out.println(answers.get("q2"));
-		System.out.println(answers.get("q3"));
-		System.out.println(answers.get("q4"));
-		
-	}
-	*/
-	
 }

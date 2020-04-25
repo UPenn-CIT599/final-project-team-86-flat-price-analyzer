@@ -9,22 +9,21 @@ Jia Xun Paw - pawjx93@seas.upenn.edu
 Yixin Miao - yixinm@seas.upenn.edu 
 
 ## Project Proposal:
+The aim of this app is to analyse how property prices have changed in Singapore over the past 15 years so users looking to purchase a flat in Singapore can be better informed when making their decision.
 
-Build a tool for appraising value of public residential properties using a data-driven approach. 
+We have 3 main sections:
 
-We hope that the tool will answer questions that users will have about a property that they are hoping to buy - for example, how much the median price of a property in a specific area differs from their asking price.
+Firstly, the Property Index tab. Here, you can see how housing prices have changed since 2005. 
 
-**Components of the project include**:
+You can further break down the data into the different flat types - 3 room, 4 room, or 5 room.
 
-- To collect geospatial data of properties across Singapore, historical transactions and listing information.
-- Informational: 
-  - Display information about changing property value over the years in specific locations that can be selected by the users
-- Property valuation
-- Give users information about the Singapore real estate market, taking into consideration factors like: 
-  - Location
-  - Size of flat
-  - Years of lease left -  Most housing in Singapore are available only on 99-year lease. A small proportion are freehold - can be owned in perpetuity
-  - Number of rooms
+We have also crunched the data to provide information about the average and median prices of each flat type over the years in the sidebar.
+
+Secondly, we also break down the numbers and show how flat prices differ across different areas in Singapore. In particular, flat prices in the coveted Central District can be up to twice that of a flat elsewhere.
+
+Users can use the dropdown list to access the list of towns in Singapore and examine the changes in prices in each town across the years.
+
+Lastly, we also have a mortgage calculator so users can find out the estimated monthly installments they’d have to pay on their flat. 
  
 ## Class designs and Interactions:
 
@@ -65,18 +64,33 @@ We hope that the tool will answer questions that users will have about a propert
   - Collaborators
     - PropertyData
     - MathAnalysis 
+    
+**CalculatorController**:
+  - Responsibilities
+    - Main controller for the GUI/widget class
+    - Coordinates and listens for ActionEvents in the widget
+  - Collaborators
+    - ChartData
+    - MathAnalysis
+    - PropertyReader
+    - PropertyData
+    - Property
+    - DataAnalyzer
 
 **Widget**:
   - Responsibilities
     - Displays the entire property price analyzer into a user-friendly GUI
   - Collaborators
-    - Chart
+    - ChartData
     - MathAnalysis
     - PropertyReader
+    - PropertyData
+    - Property
+    - DataAnalyzer
 
 ## Suggested workflow:
  
-CSV files (Jan 2015 - current) → PropertyReader → Property + PropertyData (stores all listings in an arraylist) → User Input Parameters (under widget/ GUI) → MathAnalysis → ChartData → Widget
+CSV files (Jan 2005 - current) → PropertyReader → Property + PropertyData (stores all listings in an arraylist) → User Input Parameters (under widget/ GUI) → MathAnalysis → ChartData → DataAnalyzer → CalculatorController → Widget
 
 
 ## Widget walkthrough:
