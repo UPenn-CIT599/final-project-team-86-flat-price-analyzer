@@ -24,7 +24,7 @@ class MathsAnalysisTest {
 		
 		// test for question 2
 		HashMap<String, Double> answerToQ2 = answers.get("q2");
-		assertEquals(302184, Math.round(answerToQ2.get("ANG MO KIO")));
+		assertEquals(333434, Math.round(answerToQ2.get("ANG MO KIO")));
 		
 		// test for question 3
 		HashMap<String, Double> answerToQ3 = answers.get("q3");
