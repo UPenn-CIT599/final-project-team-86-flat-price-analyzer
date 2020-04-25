@@ -12,7 +12,7 @@ public class DataAnalyzer {
     }
 
 	public static void main(String[] args) {
-		PropertyData propertyData =  PropertyReader.readFile("resale-prices.csv", true);
+		PropertyData propertyData =  PropertyReader.readFileLocal("resale-prices.csv", true);
 		System.out.println(propertyData.getProperty(1).toString());
 		System.out.println(propertyData.getSize());
 		

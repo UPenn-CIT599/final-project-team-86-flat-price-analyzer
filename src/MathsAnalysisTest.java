@@ -10,7 +10,7 @@ class MathsAnalysisTest {
 	@Test
 	void testAnswersToInsightQuestions() {
 		
-		PropertyData data = PropertyReader.readFile("resale_test.csv", true);
+		PropertyData data = PropertyReader.readFileLocal("resale_test.csv", true);
 		HashMap<String, String> userInputs = new HashMap<String, String>();
 		userInputs.put("flatType", "3");
 		userInputs.put("town", "ANG MO KIO");
