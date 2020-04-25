@@ -10,29 +10,13 @@ import java.util.*;
 
 
 public class PropertyReader {
+
+	/**
+	 * This method parses a .csv file from a url and it takes in a 
+	 * url as string and a boolean value to check if the .csv file 
+	 * contains a header
+	 */
 	
-    public static PropertyData readFileLocal(String filename, boolean hasHeader) {
-        try {
-            File file = new File(filename);
-            Scanner sc = new Scanner(file);
-            PropertyData propertyData = new PropertyData();
-
-            if (hasHeader && sc.hasNextLine()) {
-                sc.nextLine();
-            }
-            while (sc.hasNextLine()) {
-                String next = sc.nextLine();
-				Property flat = Property.toFlat(next);
-				propertyData.addProperty(flat);
-            }
-            sc.close();
-            return propertyData;
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-            return new PropertyData();
-        }
-    }
-
     public static PropertyData readFileUrl(String url, boolean hasHeader) {
     	try {
             URL rowdata = new URL(url);

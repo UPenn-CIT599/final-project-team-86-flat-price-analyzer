@@ -19,6 +19,13 @@ import java.util.HashMap;
 
 import javafx.scene.chart.XYChart;
 
+enum Frequency {
+DAILY, WEEKLY, MONTHLY, YEARLY
+}
+
+enum AggOp {
+SUM, MIN, MAX, MEDIAN, MEAN
+}
 
 
 public class ChartData {
@@ -219,17 +226,17 @@ public class ChartData {
 				
 	}
 	
-	// for testing
-	public static void main(String[] args) {
-		PropertyData propertyData = PropertyReader.readFileLocal("resale-prices.csv", true);
-		HashMap<String, String> in = new HashMap<String, String>();
-		in.put("flatType", "0");
-		in.put("town", "ALL");
-		
-		ChartData cd = new ChartData(propertyData, in);
-		
-		cd.dataPointsForHistoricalPrices();
-		cd.dataPointsForAvgPricesOverLocation();
-	}
-
+//	// for testing
+//	public static void main(String[] args) {
+//		PropertyData propertyData = PropertyReader.readFileLocal("resale-prices.csv", true);
+//		HashMap<String, String> in = new HashMap<String, String>();
+//		in.put("flatType", "0");
+//		in.put("town", "ALL");
+//		
+//		ChartData cd = new ChartData(propertyData, in);
+//		
+//		cd.dataPointsForHistoricalPrices();
+//		cd.dataPointsForAvgPricesOverLocation();
+//	}
+//
 }
