@@ -24,6 +24,16 @@ Secondly, we also break down the numbers and show how flat prices differ across 
 Users can use the dropdown list to access the list of towns in Singapore and examine the changes in prices in each town across the years.
 
 Lastly, we also have a mortgage calculator so users can find out the estimated monthly installments they’d have to pay on their flat. 
+
+
+## Set up
+
+1) Go to Releases
+2) Download MyProperty.jar into your main user folder
+3) Go into command line to run the jar file
+```sh
+java -jar MyProperty.jar 
+```
  
 ## Class designs and Interactions:
 
@@ -93,7 +103,7 @@ Lastly, we also have a mortgage calculator so users can find out the estimated m
 CSV files (Jan 2005 - current) → PropertyReader → Property + PropertyData (stores all listings in an arraylist) → User Input Parameters (under widget/ GUI) → MathAnalysis → ChartData → DataAnalyzer → CalculatorController → Widget
 
 
-## Widget walkthrough:
+## Widget Screenshots:
 
 ![Landing](screengrabs/1_Landing.png?raw=true "Landing Page")
 ![Landing](screengrabs/2_PropertyPriceIndices.png?raw=true "Property Price Indices")
