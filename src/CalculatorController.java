@@ -36,11 +36,12 @@ public class CalculatorController {
 	@FXML
     public void initialize() {
 		
-		myProperties = PropertyReader.readFile("resale-prices-2005.csv", true);
+		// myProperties = PropertyReader.readFile("jan2019_dec2019.csv", true);
+		myProperties = PropertyReader.readFileUrl("https://raw.githubusercontent.com/UPenn-CIT599/final-project-team-86-flat-price-analyzer/master/resale-prices-2005.csv?token=AO7LZBU6J6VYWVA6LCTTA626VVMLQ", true);
 		
 		// initialize elements in various tabs
 		
-		initializeBackgroundImage();
+		// initializeBackgroundImage();
 		initializeTabIndices();
 		initializeTabInsights();
 		initializeTabCalculator();

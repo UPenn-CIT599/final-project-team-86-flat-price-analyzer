@@ -6,7 +6,7 @@ class PropertyReaderTest {
 
 	@Test
 	void testReadFile() {
-		PropertyData data = PropertyReader.readFile("resale_test.csv", true);
+		PropertyData data = PropertyReader.readFileLocal("resale_test.csv", true);
 		
 	}
 	

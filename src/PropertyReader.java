@@ -4,12 +4,14 @@
  */
 
 import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 
 
 public class PropertyReader {
 	
-    public static PropertyData readFile(String filename, boolean hasHeader) {
+    public static PropertyData readFileLocal(String filename, boolean hasHeader) {
         try {
             File file = new File(filename);
             Scanner sc = new Scanner(file);
@@ -31,5 +33,30 @@ public class PropertyReader {
         }
     }
 
+    public static PropertyData readFileUrl(String url, boolean hasHeader) {
+    	try {
+            URL rowdata = new URL(url);
+            URLConnection data = rowdata.openConnection();
+            Scanner input = new Scanner(data.getInputStream());
+            PropertyData propertyData = new PropertyData();
+            
+            if (hasHeader && input.hasNextLine()) {
+                input.nextLine();
+            }
 
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                Property flat = Property.toFlat(line);
+				propertyData.addProperty(flat);
+            }
+            
+            input.close();
+            return propertyData;
+        }
+        catch (Exception e) {
+        	System.out.println("CSV from url not found!");
+            return new PropertyData();
+        }
+    }
+    
 }
