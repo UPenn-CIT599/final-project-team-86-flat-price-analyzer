@@ -23,17 +23,38 @@ import javafx.collections.ObservableList;
 public class PropertyData {
     ArrayList<Property> propertyList = new ArrayList<Property>();    
     
+    
+    /**
+     * This method adds new properties into the PropertyData array
+     */
+    
     public void addProperty(Property property) {
         propertyList.add(property);
     }
 
+    /**
+     * This method returns details of a particular property by using
+     * its index in the array as argument
+     */    
+    
     public Property getProperty(int index) {
         return propertyList.get(index); 
     }
 
+    /**
+     * This method returns the number of properties in the 
+     * propertyList array
+     */
+    
     public int getSize() {
         return propertyList.size();
     }
+
+    /**
+     * This method creates a filter that takes in the name of a 
+     * town as argument and returns all the properties 
+     *  in that town
+     */    
     
     public PropertyData filterByTown(String town) {
 		PropertyData filteredProperties = new PropertyData();
@@ -47,6 +68,14 @@ public class PropertyData {
 		return filteredProperties;
 	}
     
+
+   /**
+     * This method creates a filter that takes in the name of a 
+     * flat type as argument and returns all the properties 
+     * of that flat type - eg 3 room/ 4 room
+     */
+    
+    
     public PropertyData filterByFlatType(String flatType) {
 		PropertyData filteredProperties = new PropertyData();
 		
@@ -58,6 +87,12 @@ public class PropertyData {
 		
 		return filteredProperties;
 	}
+    
+    /**
+     * This method creates a filter that takes in a year (int)
+     * and a month (int) and returns all properties that were
+     *  bought/ sold during that period of time
+     */
     
     public PropertyData filterByDate(int year, int month) {
 		PropertyData filteredProperties = new PropertyData();
@@ -71,6 +106,12 @@ public class PropertyData {
 		return filteredProperties;
 	}
     
+    
+    /**
+     * This method returns the earliest year where a
+     * property was bought/sold from the propertyList array in int
+     */
+    
     public int getMinYear() {
 		int minYear = this.getProperty(0).getYear();
 		
@@ -81,7 +122,12 @@ public class PropertyData {
 		
 		return minYear;
 	}
-
+    
+    /**
+     * This method returns the latest year where a
+     * property was bought/sold from the propertyList array in int
+     */
+    
     public int getMaxYear() {
 		int maxYear = 0;
 		
@@ -92,6 +138,11 @@ public class PropertyData {
 		
 		return maxYear;
 	}
+    
+    /**
+     * This method returns the earliest year where a
+     * property was bought/sold from the propertyList array as a double
+     */
     
     public double getMinDateInYears() {
     	double minDate = this.getProperty(0).getYear() + (this.getProperty(0).getMonth() / 12.0);
@@ -104,6 +155,11 @@ public class PropertyData {
 		return minDate;
     }
     
+    /**
+     * This method returns the latest year where a
+     * property was bought/sold from the propertyList array as a double
+     */
+    
     public double getMaxDateInYears() {
     	double maxDate = 0;
 		
@@ -114,6 +170,11 @@ public class PropertyData {
 		
 		return maxDate;
     }
+
+    /**
+     * This method returns the earliest month where a
+     * property was bought/sold from a specific year
+     */
     
     public int getMinMonthInYear(int year) {
 		int minMonth = this.getProperty(0).getMonth();
@@ -127,7 +188,12 @@ public class PropertyData {
 		
 		return minMonth;
 	}
-    	
+    
+    /**
+     * This method returns the latest month where a
+     * property was bought/sold from a specific year
+     */
+    
 	public int getMaxMonthInYear(int year) {
 		int maxMonth = 0;
 		
@@ -140,6 +206,11 @@ public class PropertyData {
 		
 		return maxMonth;
 	}
+	
+    /**
+     * This method returns a list of names of the towns
+     * from the data set
+     */
     
 	public ObservableList<String> getUniqueTowns() {
 		ObservableList<String> streetNames = FXCollections.observableArrayList();
