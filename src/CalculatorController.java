@@ -32,10 +32,11 @@ public class CalculatorController {
 	
 	private PropertyData myProperties;
 	
+	
 	@FXML
     public void initialize() {
 		
-		myProperties = PropertyReader.readFile("resale-prices-2005.csv", true);
+		myProperties = PropertyReader.readFile("jan2019_dec2019.csv", true);
 		
 		// initialize elements in various tabs
 		
@@ -459,13 +460,7 @@ public class CalculatorController {
 		@FXML
 		private Label q3Location;
 		
-		// Global Variables used for the methods below
-		// PropertyData inputPropertyData = PropertyReader.readFile("resale-prices.csv", true);
-		ObservableList<String> townList = FXCollections.observableArrayList("ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK", "BUKIT MERAH", "BUKIT PANJANG",
-				"BUKIT TIMAH", "CENTRAL AREA", "CHOA CHU KANG", "CLEMENTI", "GEYLANG", "HOUGANG", "JURONG EAST",
-				"JURONG WEST", "KALLANG/WHAMPOA", "MARINE PARADE", "PASIR RIS", "PUNGGOL", "QUEENSTOWN", "SEMBAWANG",
-				"SENGKANG", "SERAGNOON" );
-	  
+	
 	 // Methods to be used with Maths Analysis 
 	 /**
 	  * This method is to provide text content for the "All" tab under "Property Index"
@@ -597,12 +592,6 @@ public class CalculatorController {
 	  }
 	 
 	 
-	 /**
-	  * This method is to get the initialise locationSelection
-	  */
-	 //public void helperStartCombo() {
-	//	 locationSelection.setItems(townList);
-	 //}
 	 
 	 /**
 	  * This method is to get the user's selection of the location information 
@@ -627,7 +616,7 @@ public class CalculatorController {
 		  HashMap<String, String> outcomes = this.helperCheckIfAnswerIsNull(m1, "0", inForTab.get("town"));	
 		  
 		  q2Location.setText("Average Price for All Properties in the selected town (SGD): " + outcomes.get("ans2"));	  
-		  q3Location.setText("Median Price for All Properties (SGD): " + outcomes.get("ans3"));
+		  q3Location.setText("Median Price for All Properties in the selected town (SGD): " + outcomes.get("ans3"));
 		 
 	  }
 	 

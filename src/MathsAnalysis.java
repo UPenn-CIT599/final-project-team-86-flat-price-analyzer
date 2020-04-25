@@ -2,22 +2,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import javafx.collections.ObservableList;
+
 public class MathsAnalysis {
 
 	PropertyData pd; // arraylist<Property>
 	HashMap<String, String> userInputs; // key-value pairs of user input info
 										// <flatType> - 1,2,3,4,5,6,7, 0 (String)
 										// <town> - CAPITAL LETTER OF TOWN NAME or ALL(String)
+	ObservableList<String> townList;
 	
-	String[] townList = { "ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK", "BUKIT MERAH", "BUKIT PANJANG",
-			"BUKIT TIMAH", "CENTRAL AREA", "CHOA CHU KANG", "CLEMENTI", "GEYLANG", "HOUGANG", "JURONG EAST",
-			"JURONG WEST", "KALLANG/WHAMPOA", "MARINE PARADE", "PASIR RIS", "PUNGGOL", "QUEENSTOWN", "SEMBAWANG",
-			"SENGKANG", "SERAGNOON" };
 
 	// Constructor
 	public MathsAnalysis(PropertyData pd, HashMap<String, String> userInputs) {
 		this.pd = pd;
 		this.userInputs = userInputs;
+		this.townList = pd.getUniqueTowns();
 	}
 
 	/**
@@ -225,8 +225,8 @@ public class MathsAnalysis {
 
 		
 
-		for (int i = 0; i < 22; i++) {
-			String town = this.townList[i];
+		for (int i = 0; i < this.townList.size(); i++) {
+			String town = this.townList.get(i);
 			if (diffFlatLocationGroupPd.get(town) != null) {
 				double avgPrice = this.helperCalculateAveragePrice(diffFlatLocationGroupPd.get(town));
 				townAvg.put(town, avgPrice);
@@ -425,16 +425,17 @@ public class MathsAnalysis {
 		return answers;
 	}
 
-	
+	/*
 	// This is for testing MathsAnalysis class
 	public static void main(String[] args) {
-		PropertyData propertyData = PropertyReader.readFile("resale-prices.csv", true);
-		// PropertyData propertyData = PropertyReader.readFile("resale_test.csv", true);
+		
+		// PropertyData propertyData = PropertyReader.readFile("resale-prices.csv", true);
+		PropertyData propertyData = PropertyReader.readFile("resale-prices-2010.csv", true);
 		// System.out.println(propertyData.getProperty(1).toString());
 		// System.out.println(propertyData.getSize());
 		HashMap<String, String> in = new HashMap<String, String>();
 		in.put("flatType", "0");
-		in.put("town", "ALL");
+		in.put("town", "YISHUN");
 
 		MathsAnalysis m = new MathsAnalysis(propertyData, in);
 		// PropertyData test = m.helperFilterOutRelevantData("Ang Mo Kio");
@@ -449,5 +450,6 @@ public class MathsAnalysis {
 		System.out.println(answers.get("q4"));
 		
 	}
+	*/
 	
 }
