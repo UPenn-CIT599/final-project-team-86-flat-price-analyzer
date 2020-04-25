@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
-public class CalculatorController {
+public class WidgetController {
 	
 	private PropertyData myProperties;
 	
