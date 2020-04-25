@@ -13,7 +13,7 @@ public class Widget extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			// BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
-			TabPane root = (TabPane)FXMLLoader.load(getClass().getResource("GUI.fxml"));
+			TabPane root = (TabPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
 			Scene scene = new Scene(root, 600,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
