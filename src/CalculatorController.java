@@ -39,23 +39,44 @@ public class CalculatorController {
 		PropertyData fourRooms = myProperties.filterByFlatType("4");
 		PropertyData fiveRooms = myProperties.filterByFlatType("5");
 		
-		XYChart.Series<Number, Number> seriesAll = ChartData.createXYSeries(myProperties, Frequency.MONTHLY, "All", AggOp.MEAN, 1000);
-		XYChart.Series<Number, Number> series3rm = ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000);
-		XYChart.Series<Number, Number> series4rm = ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000);
-		XYChart.Series<Number, Number> series5rm = ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000);
+		// XYChart.Series<Number, Number> seriesAll = ChartData.createXYSeries(myProperties, Frequency.MONTHLY, "All", AggOp.MEAN, 1000);
+		// XYChart.Series<Number, Number> series3rm = ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000);
+		// XYChart.Series<Number, Number> series4rm = ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000);
+		// XYChart.Series<Number, Number> series5rm = ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000);
 		
-		if (myProperties.getSize() > 0) { chartAll.getData().add(seriesAll); }
+		if (myProperties.getSize() > 0) { 
+			chartAll.getData().add(ChartData.createXYSeries(myProperties, Frequency.MONTHLY, "All", AggOp.MEAN, 1000));
+			xAxisAll.setAutoRanging(false);
+			xAxisAll.setLowerBound(Math.round(myProperties.getMinDateInYears()));
+			xAxisAll.setUpperBound(Math.round(myProperties.getMaxDateInYears()));
+			xAxisAll.setTickUnit(1.0);
+		}
 		if (threeRooms.getSize() > 0) { 
 			chartAll.getData().add(ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000));
 			chart3Rm.getData().add(ChartData.createXYSeries(threeRooms, Frequency.MONTHLY, "3 Room", AggOp.MEAN, 1000));
+			
+			xAxis3Rm.setAutoRanging(false);
+			xAxis3Rm.setLowerBound(Math.round(threeRooms.getMinDateInYears()));
+			xAxis3Rm.setUpperBound(Math.round(threeRooms.getMaxDateInYears()));
+			xAxis3Rm.setTickUnit(1.0);
 		}
 		if (fourRooms.getSize() > 0) { 
 			chartAll.getData().add(ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000));
 			chart4Rm.getData().add(ChartData.createXYSeries(fourRooms, Frequency.MONTHLY, "4 Room", AggOp.MEAN, 1000));
+			
+			xAxis4Rm.setAutoRanging(false);
+			xAxis4Rm.setLowerBound(Math.round(fourRooms.getMinDateInYears()));
+			xAxis4Rm.setUpperBound(Math.round(fourRooms.getMaxDateInYears()));
+			xAxis4Rm.setTickUnit(1.0);
 		}
 		if (fiveRooms.getSize() > 0) { 
 			chartAll.getData().add(ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000));
 			chart5Rm.getData().add(ChartData.createXYSeries(fiveRooms, Frequency.MONTHLY, "5 Room", AggOp.MEAN, 1000));
+			
+			xAxis5Rm.setAutoRanging(false);
+			xAxis5Rm.setLowerBound(Math.round(fiveRooms.getMinDateInYears()));
+			xAxis5Rm.setUpperBound(Math.round(fiveRooms.getMaxDateInYears()));
+			xAxis5Rm.setTickUnit(1.0);
 		}
 		
 		answersToAnalysisQnAllTab();
@@ -104,6 +125,33 @@ public class CalculatorController {
 	@FXML
 	private NumberAxis yAxisAll;
 	
+	@FXML
+	private NumberAxis yAxis3Rm;
+	
+	@FXML
+	private NumberAxis yAxis4Rm;
+	
+	@FXML
+	private NumberAxis yAxis5Rm;
+	
+	@FXML
+	private NumberAxis yAxisLocation;
+	
+	@FXML
+	private NumberAxis xAxisAll;
+	
+	@FXML
+	private NumberAxis xAxis3Rm;
+	
+	@FXML
+	private NumberAxis xAxis4Rm;
+	
+	@FXML
+	private NumberAxis xAxis5Rm;
+	
+	@FXML
+	private NumberAxis xAxisLocation;
+	
 	// [TAB] Location Insights --------------------------------------------------
 	
 	//@FXML
@@ -129,7 +177,12 @@ public class CalculatorController {
 		PropertyData propertiesInSelectedTown = myProperties.filterByTown(town);
 		if (propertiesInSelectedTown.getSize() > 0) { 
 			chartLocation.getData().clear();;
-			chartLocation.getData().add(ChartData.createXYSeries(propertiesInSelectedTown, Frequency.MONTHLY, town, AggOp.MEAN, 1000)); 
+			chartLocation.getData().add(ChartData.createXYSeries(propertiesInSelectedTown, Frequency.MONTHLY, town, AggOp.MEAN, 1000));
+			
+			xAxisLocation.setAutoRanging(false);
+			xAxisLocation.setLowerBound(Math.round(propertiesInSelectedTown.getMinDateInYears()));
+			xAxisLocation.setUpperBound(Math.round(propertiesInSelectedTown.getMaxDateInYears()));
+			xAxisLocation.setTickUnit(1.0);
 		}
 		answersToAnalysisQnLocation();
 	}

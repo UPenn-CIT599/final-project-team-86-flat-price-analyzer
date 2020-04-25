@@ -92,7 +92,29 @@ public class PropertyData {
 		
 		return maxYear;
 	}
-
+    
+    public double getMinDateInYears() {
+    	double minDate = this.getProperty(0).getYear() + (this.getProperty(0).getMonth() / 12.0);
+    	
+    	for (Property property : propertyList) {
+			double date = property.getYear() + (property.getMonth() / 12.0);
+			minDate = date < minDate ? date : minDate; 
+		}
+		
+		return minDate;
+    }
+    
+    public double getMaxDateInYears() {
+    	double maxDate = 0;
+		
+		for (Property property : propertyList) {
+			double date = property.getYear() + (property.getMonth() / 12.0);
+			maxDate = date > maxDate ? date : maxDate; 
+		}
+		
+		return maxDate;
+    }
+    
     public int getMinMonthInYear(int year) {
 		int minMonth = this.getProperty(0).getMonth();
 		
