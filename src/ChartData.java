@@ -158,7 +158,7 @@ public class ChartData {
 					for (int currentMonth = firstMonth; currentMonth <= lastMonth; currentMonth++) {
 						PropertyData myProps = properties.filterByDate(currentYear, currentMonth);
 						Double myPx = getAggPrice(myProps, aggOp, scaler);
-						if (!myPx.isNaN()) { series.getData().add(new XYChart.Data<Number, Number>(xVal, myPx)); }
+						if (!myPx.isNaN()) { series.getData().add(new XYChart.Data<Number, Number>(minYear + (xVal / 12.0), myPx)); }
 						xVal++;
 					}
 				}
