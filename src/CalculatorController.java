@@ -1,3 +1,5 @@
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -17,6 +19,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.util.StringConverter;
 
 public class CalculatorController {
@@ -31,11 +40,21 @@ public class CalculatorController {
 		
 		// initialize elements in various tabs
 		
+		initializeBackgroundImage();
 		initializeTabIndices();
 		initializeTabInsights();
 		initializeTabCalculator();
 		initializeTabAbout();
     }
+	
+	private void initializeBackgroundImage() {
+		
+		BackgroundImage myBI= new BackgroundImage(new Image("https://i.pinimg.com/originals/4c/93/8f/4c938f96da8061dd7fbc54270f005982.jpg",32,32,false,true),
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          BackgroundSize.DEFAULT);
+		//then you set to your node
+		anchorHome.setBackground(new Background(myBI));
+	}
 	
 	private void initializeTabIndices() {
 		
@@ -181,6 +200,11 @@ public class CalculatorController {
 	private void initializeTabAbout() {
 		// ADD here
 	}
+	
+	// [TAB] Home --------------------------------------------------
+	
+	@FXML
+	private AnchorPane anchorHome;
 	
 	// [TAB] Property Index --------------------------------------------------
 	
