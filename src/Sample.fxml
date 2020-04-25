@@ -29,7 +29,7 @@
   <tabs>
     <Tab text="Home">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-image: url('file://../flatImage.jpg'); -fx-background-size: cover;">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-image: url('file:/Users/jmism/flatImage.jpg'); -fx-background-size: cover;">
                <children>
                   <Label alignment="CENTER" layoutY="158.0" prefHeight="28.0" prefWidth="600.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" text="MyProperty" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <font>
