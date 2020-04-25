@@ -19,6 +19,13 @@ import java.util.HashMap;
 
 import javafx.scene.chart.XYChart;
 
+enum Frequency {
+	DAILY, WEEKLY, MONTHLY, YEARLY
+}
+
+enum AggOp {
+	SUM, MIN, MAX, MEDIAN, MEAN
+}
 
 
 public class ChartData {
@@ -32,14 +39,14 @@ public class ChartData {
 		this.pd = pd;
 		this.m = new MathsAnalysis(pd, userInputs);
 		// userInput: 
-		// key1:"flatType" - value1: any integer in String format from "0" to "7" 
-		// "0" means select all flatType, 1 - 7 means select respective flatType
+		// key1:"flatType" - value1: any integer in String format from "0" to "5" 
+		// "0" means select all flatType, 1 - 5 means select respective flatType
 		// key2: "town" - value2: "ALL" or "ANG MO KIO" etc
 		this.userInputs = userInputs;
 	}
 	
 	/**
-	 * This is a helper method for calculating the average of a given propertydata
+	 * This is a helper method for calculating the average of a given PropertyData
 	 * 
 	 * @param prices
 	 * @return averagePrice
@@ -99,16 +106,11 @@ public class ChartData {
 		
 		// Get average price for every month's data, output to histPrices
 		
-		// System.out.println(monthlyHistData.keySet());
-		
 		for (String key : monthlyHistData.keySet()) {
-			// System.out.println(key);
 			Double monthlyAvgPrice = this.helperCalculateAveragePrice(monthlyHistData.get(key));
 			histPrices.put(key, monthlyAvgPrice);
 		}
-		
-		// System.out.println(histPrices.toString());
-		
+				
 		return histPrices;
 	}
 	
@@ -119,9 +121,18 @@ public class ChartData {
 	 */
 	public HashMap<String, Double> dataPointsForAvgPricesOverLocation(){
 		HashMap<String, Double> avgPriceOverLocation = this.m.q2calculateTownAverage();
-		// System.out.println(avgPriceOverLocation.toString());
 		return avgPriceOverLocation;
 	}
+	
+	/**
+	 * This method returns XYChart object needed for plotting in CalculatorController
+	 * @param properties
+	 * @param freq
+	 * @param seriesName
+	 * @param aggOp
+	 * @param scaler
+	 * @return series
+	 */
 	
 	public static XYChart.Series<Number, Number> createXYSeries(PropertyData properties, Frequency freq, String seriesName, AggOp aggOp, double scaler) {
 		XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>(); 
@@ -177,6 +188,13 @@ public class ChartData {
 		return series;
 	}
 	
+	/**
+	 * This method created the AggOp object needed for createXYSeries method 
+	 * @param properties
+	 * @param aggOp
+	 * @param scaler
+	 * @return 
+	 */
 	private static double getAggPrice(PropertyData properties, AggOp aggOp, double scaler) {
 		switch (aggOp) {
 		case MEAN: 
@@ -217,19 +235,6 @@ public class ChartData {
 			throw new IllegalArgumentException("Unexpected value: " + aggOp);
 		}
 				
-	}
-	
-	// for testing
-	public static void main(String[] args) {
-		PropertyData propertyData = PropertyReader.readFileLocal("resale-prices.csv", true);
-		HashMap<String, String> in = new HashMap<String, String>();
-		in.put("flatType", "0");
-		in.put("town", "ALL");
-		
-		ChartData cd = new ChartData(propertyData, in);
-		
-		cd.dataPointsForHistoricalPrices();
-		cd.dataPointsForAvgPricesOverLocation();
 	}
 
 }

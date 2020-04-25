@@ -10,7 +10,8 @@ class MathsAnalysisTest {
 	@Test
 	void testAnswersToInsightQuestions() {
 		
-		PropertyData data = PropertyReader.readFileLocal("resale_test.csv", true);
+		//PropertyData data = PropertyReader.readFileLocal("resale_test.csv", true);
+		PropertyData data = PropertyReader.readFileUrl("https://raw.githubusercontent.com/UPenn-CIT599/final-project-team-86-flat-price-analyzer/master/resale_test.csv?token=APCCDEVFSZ5JGQYTVZJGOYS6VVOD2", true);
 		HashMap<String, String> userInputs = new HashMap<String, String>();
 		userInputs.put("flatType", "3");
 		userInputs.put("town", "ANG MO KIO");
