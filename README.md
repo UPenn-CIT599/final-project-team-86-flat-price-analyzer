@@ -88,7 +88,7 @@ java -jar MyProperty.jar
   - Responsibilities 
     - Calculate monthly installment needed for a given loan amount
   - Collaborators
-    
+   - WidgetController
 
 **WidgetController**:
   - Responsibilities
